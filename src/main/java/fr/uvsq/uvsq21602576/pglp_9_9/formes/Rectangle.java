@@ -93,4 +93,20 @@ public class Rectangle extends Forme {
                 + super.getPointReference().toString() + ",BasDroit="
                 + this.basDroit.toString() + ")";
     }
+
+    /**
+     * Retourne une représentation textuelle.
+     * Avec des tabulations pour la profondeur.
+     * @param profondeur Profondeur dans l'arbre de Composant
+     * @return Représentation textuelle
+     */
+    @Override
+    public String toString(final int profondeur) {
+        String s = "";
+        for (int i = 0; i < profondeur; i++) {
+            s = s.concat("    ");
+        }
+        s = s.concat("|-");
+        return s.concat(this.toString());
+    }
 }

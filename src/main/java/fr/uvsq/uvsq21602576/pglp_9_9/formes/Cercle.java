@@ -12,7 +12,7 @@ public class Cercle extends Forme {
     /**
      * Constructeur.
      * Crée un cercle de centre centre et de rayon r.
-     * @param nom   Nom du cercle
+     * @param nom Nom du cercle
      * @param centre Centre du cercle
      * @param r Rayon du cercle
      */
@@ -68,5 +68,21 @@ public class Cercle extends Forme {
         return super.getNom() + " : Cercle(centre="
                 + super.getPointReference().toString() + ",rayon=" + this.rayon
                 + ")";
+    }
+
+    /**
+     * Retourne une représentation textuelle.
+     * Avec des tabulations pour la profondeur.
+     * @param profondeur Profondeur dans l'arbre de Composant
+     * @return Représentation textuelle
+     */
+    @Override
+    public String toString(final int profondeur) {
+        String s = "";
+        for (int i = 0; i < profondeur; i++) {
+            s = s.concat("    ");
+        }
+        s = s.concat("|-");
+        return s.concat(this.toString());
     }
 }

@@ -6,7 +6,7 @@ package fr.uvsq.uvsq21602576.pglp_9_9.formes;
  * Classe Abstraite.
  * @author Flora
  */
-public abstract class Forme implements Deplacable {
+public abstract class Forme implements ComposantDessin {
     /** Point de référence. */
     private Point pointReference;
     /** Nom de la variable. */

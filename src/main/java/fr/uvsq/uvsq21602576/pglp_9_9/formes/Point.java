@@ -82,4 +82,14 @@ public class Point implements Deplacable {
         }
         return true;
     }
+
+    /**
+     * Retourne une représentation textuelle.
+     * Sous la forme "(X, Y)"
+     * @return Représentation textuelle
+     */
+    @Override
+    public String toString() {
+        return "(" + this.x + ", " + this.y + ")";
+    }
 }

@@ -59,4 +59,20 @@ public class Carre extends Rectangle {
                 + super.getPointReference().toString() + ",longueur="
                 + super.getLongueur() + ")";
     }
+
+    /**
+     * Retourne une représentation textuelle.
+     * Avec des tabulations pour la profondeur.
+     * @param profondeur Profondeur dans l'arbre de Composant
+     * @return Représentation textuelle
+     */
+    @Override
+    public String toString(final int profondeur) {
+        String s = "";
+        for (int i = 0; i < profondeur; i++) {
+            s = s.concat("    ");
+        }
+        s = s.concat("|-");
+        return s.concat(this.toString());
+    }
 }
