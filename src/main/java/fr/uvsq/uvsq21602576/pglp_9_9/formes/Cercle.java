@@ -12,11 +12,12 @@ public class Cercle extends Forme {
     /**
      * Constructeur.
      * Crée un cercle de centre centre et de rayon r.
+     * @param nom   Nom du cercle
      * @param centre Centre du cercle
      * @param r Rayon du cercle
      */
-    public Cercle(final Point centre, final int r) {
-        super(centre);
+    public Cercle(final String nom, final Point centre, final int r) {
+        super(nom, centre);
         this.rayon = r;
     }
 
@@ -27,21 +28,25 @@ public class Cercle extends Forme {
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = 1;
+        int result = super.hashCode();
         result = prime * result + rayon;
         return result;
     }
 
     /**
      * Teste si les deux Cercles sont égaux.
-     * Deux Cercles sont égaux s'ils ont le même centre et le meme rayon.
+     * Deux Cercles sont égaux s'ils ont le même centre, le meme rayon et le
+     * meme nom.
      * @param obj Cercle à comparer
      * @return true si égaux, false sinon
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
         }
         if (!(obj instanceof Cercle)) {
             return false;
@@ -55,12 +60,13 @@ public class Cercle extends Forme {
 
     /**
      * Retourne une représentation textuelle.
-     * Sous la forme 'Cercle(centre=,rayon=);
+     * Sous la forme 'Cercle(centre=?,rayon=?);
      * @return Représentation textuelle
      */
     @Override
     public String toString() {
-        return "Cercle(centre=" + super.getPointReference().toString()
-                + ",rayon=" + this.rayon + ")";
+        return super.getNom() + " : Cercle(centre="
+                + super.getPointReference().toString() + ",rayon=" + this.rayon
+                + ")";
     }
 }

@@ -5,19 +5,19 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
- * Classe de tests pour Cercle.
+ * Classe de test pour Carré.
  * @author Flora
  */
-public class CercleTest {
+public class CarreTest {
 
     /**
      * Teste le déplacement.
      */
     @Test
     public void deplaceTest() {
-        Cercle c = new Cercle("c1", new Point(3, 1), 10);
-        c.deplace(new Point(1, -1));
-        Cercle expected = new Cercle("c1", new Point(4, 0), 10);
+        Carre c = new Carre("c1", new Point(3, 4), 10);
+        c.deplace(new Point(-1, -1));
+        Carre expected = new Carre("c1", new Point(2, 3), 10);
         assertEquals(expected, c);
     }
 }

@@ -9,14 +9,14 @@ import org.junit.Test;
  * @author Flora
  */
 public class PointTest {
-    
+
     /**
      * Teste le déplacement.
      */
     @Test
     public void deplaceTest() {
         Point p = new Point(1, 3);
-        p.deplace(new Point(3,-2));
+        p.deplace(new Point(3, -2));
         Point expected = new Point(4, 1);
         assertEquals(expected, p);
     }

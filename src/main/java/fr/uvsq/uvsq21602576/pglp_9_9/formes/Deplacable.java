@@ -10,5 +10,5 @@ public interface Deplacable {
      * Déplace selon un vecteur de deplacement dP.
      * @param dP Vecteur de déplacement.
      */
-    void deplace(final Point dP);
+    void deplace(Point dP);
 }
