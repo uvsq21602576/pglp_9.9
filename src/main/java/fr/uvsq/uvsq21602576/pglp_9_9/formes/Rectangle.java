@@ -67,7 +67,7 @@ public class Rectangle extends Forme {
      * Retourne la longueur du rectangle.
      * @return Longueur
      */
-    protected int getLongueur() {
+    public int getLongueur() {
         int l = this.basDroit.getX() - super.getPointReference().getX();
         return (l < 0) ? -l : l;
     }

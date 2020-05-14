@@ -40,18 +40,18 @@ public abstract class Forme implements ComposantDessin {
     public abstract String toString();
 
     /**
-     * Retourne le point de référence.
+     * Retourne une copie du point de référence.
      * @return Point de référence
      */
-    protected Point getPointReference() {
-        return pointReference;
+    public Point getPointReference() {
+        return pointReference.copie();
     }
 
     /**
      * Retourne le nom de la forme.
      * @return Nom
      */
-    protected String getNom() {
+    public String getNom() {
         return nom;
     }
 

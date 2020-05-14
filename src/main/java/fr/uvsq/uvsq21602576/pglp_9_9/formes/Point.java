@@ -47,6 +47,14 @@ public class Point implements Deplacable {
     }
 
     /**
+     * Retourne une copie du point.
+     * @return Copie du point
+     */
+    public Point copie() {
+        return new Point(x, y);
+    }
+
+    /**
      * Retourne le haché correspondant.
      * @return Haché
      */

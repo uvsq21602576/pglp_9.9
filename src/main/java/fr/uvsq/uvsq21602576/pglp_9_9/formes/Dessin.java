@@ -32,6 +32,14 @@ public class Dessin implements ComposantDessin {
     public void ajoute(final ComposantDessin c) {
         composantsFils.add(c);
     }
+    
+    /**
+     * Ajoute une liste de composants au dessin.
+     * @param listeC Liste de composants à ajouter
+     */
+    public void ajouteTout(final List<ComposantDessin> listeC) {
+        composantsFils.addAll(listeC);
+    }
 
     /**
      * Retire un composant du dessin.
@@ -98,12 +106,20 @@ public class Dessin implements ComposantDessin {
         }
         return true;
     }
+    
+    /**
+     * Retourne le nom du dessin.
+     * @return  Nom du dessin
+     */
+    public String getNom() {
+        return nom;
+    }
 
     /**
      * Retourne la liste de Composant, non modifiable.
      * @return liste non modifibale de composants
      */
-    List<ComposantDessin> getComposantsFils() {
+    public List<ComposantDessin> getComposantsFils() {
         return Collections.unmodifiableList(this.composantsFils);
     }
 
