@@ -102,7 +102,8 @@ public class CarreDAOJDBC extends DAO<Carre> {
                             + "longueur int not null, "
                             + "dessinID int not null,"
                             + "primary key (nom, dessinID), "
-                            + "foreign key (dessinID) references dessin(dessinID))");
+                            + "foreign key (dessinID) "
+                            + "references dessin(dessinID))");
                 }
             }
         } catch (MetaDataException | SQLException e) {
@@ -141,16 +142,17 @@ public class CarreDAOJDBC extends DAO<Carre> {
      * @throws DoublonException En cas de duplication de clé, si l'objet obj
      *         existe déjà
      */
-    static void insert(final Carre obj, final int dessinID, final Connection conn)
-            throws InsertionException, CreationTableException,
-            DoublonException {
+    static void insert(final Carre obj, final int dessinID,
+            final Connection conn) throws InsertionException,
+            CreationTableException, DoublonException {
         try {
             createTable(conn);
             try (PreparedStatement insertCarre = conn.prepareStatement(
                     "INSERT INTO carre values (?, ?, ?, ?, ?)")) {
                 remplitStatement(insertCarre, obj.getNom(),
                         obj.getPointReference().getX(),
-                        obj.getPointReference().getY(), obj.getLongueur(), dessinID);
+                        obj.getPointReference().getY(), obj.getLongueur(),
+                        dessinID);
                 insertCarre.execute();
             }
         } catch (DerbySQLIntegrityConstraintViolationException e) {
@@ -191,7 +193,7 @@ public class CarreDAOJDBC extends DAO<Carre> {
         }
         return result;
     }
-    
+
     /**
      * Lit tous les carrés dans la base de donnée.
      * Carré apparetenant au dessin dessinID
@@ -200,8 +202,8 @@ public class CarreDAOJDBC extends DAO<Carre> {
      * @return Liste de Carrés lus
      * @throws LectureException En cas d'erreur lors de la lecture
      */
-    static List<ComposantDessin> readAll(final int dessinID, final Connection conn)
-            throws LectureException {
+    static List<ComposantDessin> readAll(final int dessinID,
+            final Connection conn) throws LectureException {
         ArrayList<ComposantDessin> listeCarre = new ArrayList<>();
         try {
             if (!tableExists("carre", conn)) {
@@ -209,9 +211,8 @@ public class CarreDAOJDBC extends DAO<Carre> {
             }
         } catch (MetaDataException e) {
         }
-        try (PreparedStatement selectCarre =
-                conn.prepareStatement("SELECT * FROM carre "
-                        + "WHERE dessinID = ?")) {
+        try (PreparedStatement selectCarre = conn.prepareStatement(
+                "SELECT * FROM carre " + "WHERE dessinID = ?")) {
             remplitStatement(selectCarre, dessinID);
             try (ResultSet rs = selectCarre.executeQuery()) {
                 while (rs.next()) {
@@ -236,7 +237,8 @@ public class CarreDAOJDBC extends DAO<Carre> {
      * @throws LectureException En cas d'erreur lors de la lecture
      * @throws InexistantException Si le carré id n'existe pas
      */
-    static Carre read(final String id, final int dessinID, final Connection conn)
+    static Carre read(final String id, final int dessinID,
+            final Connection conn)
             throws LectureException, InexistantException {
         try {
             if (!tableExists("carre", conn)) {
@@ -244,9 +246,8 @@ public class CarreDAOJDBC extends DAO<Carre> {
             }
         } catch (MetaDataException e) {
         }
-        try (PreparedStatement selectCarre =
-                conn.prepareStatement("SELECT * FROM carre "
-                        + "WHERE nom = ? AND dessinID = ?")) {
+        try (PreparedStatement selectCarre = conn.prepareStatement(
+                "SELECT * FROM carre " + "WHERE nom = ? AND dessinID = ?")) {
             remplitStatement(selectCarre, id, dessinID);
             try (ResultSet rs = selectCarre.executeQuery()) {
                 if (rs.next()) {
@@ -297,7 +298,7 @@ public class CarreDAOJDBC extends DAO<Carre> {
     /**
      * Modifie le carré dans la base de donnée.
      * Lui assigne ces nouveau paramêtre.
-     * Accessible via son nom  et l'id de son dessin.
+     * Accessible via son nom et l'id de son dessin.
      * @param obj Carré à modifié
      * @param dessinID ID du dessin auquel la forme appartient
      * @param conn Connection à la base de donnée
@@ -305,7 +306,8 @@ public class CarreDAOJDBC extends DAO<Carre> {
      *         donnée
      * @throws ModificationException En cas d'erreur pendant la modification.
      */
-    static void modify(final Carre obj, final int dessinID, final Connection conn)
+    static void modify(final Carre obj, final int dessinID,
+            final Connection conn)
             throws InexistantException, ModificationException {
         try {
             if (!tableExists("carre", conn)) {
@@ -314,11 +316,10 @@ public class CarreDAOJDBC extends DAO<Carre> {
         } catch (MetaDataException e) {
         }
         try {
-            try (PreparedStatement selectCarre = conn.prepareStatement(
-                    "SELECT * FROM carre "
+            try (PreparedStatement selectCarre =
+                    conn.prepareStatement("SELECT * FROM carre "
                             + "WHERE nom = ? AND dessinID = ?")) {
-                remplitStatement(selectCarre, 
-                        obj.getNom(), dessinID);
+                remplitStatement(selectCarre, obj.getNom(), dessinID);
                 try (ResultSet rs = selectCarre.executeQuery()) {
                     if (!rs.next()) {
                         throw new InexistantException(obj.getNom());
@@ -370,7 +371,7 @@ public class CarreDAOJDBC extends DAO<Carre> {
         }
         return result;
     }
-    
+
     /**
      * Supprime les carrés appartenant à dessinID de la base de données.
      * @param dessinID ID du dessin auquel les formes appartiennent
@@ -381,9 +382,8 @@ public class CarreDAOJDBC extends DAO<Carre> {
             throws SuppressionException {
         try {
             if (tableExists("carre", conn)) {
-                try (PreparedStatement deleteCarre = conn
-                        .prepareStatement("DELETE FROM carre "
-                                + "WHERE dessinID = ?")) {
+                try (PreparedStatement deleteCarre = conn.prepareStatement(
+                        "DELETE FROM carre " + "WHERE dessinID = ?")) {
                     remplitStatement(deleteCarre, dessinID);
                     deleteCarre.execute();
                 }
@@ -393,7 +393,7 @@ public class CarreDAOJDBC extends DAO<Carre> {
             throw new SuppressionException("carrés", e.getMessage());
         }
     }
-    
+
     /**
      * Supprime les carrés appartenant à dessinID de la base de données.
      * Dont les noms ne sont pas dans noms.
@@ -402,18 +402,17 @@ public class CarreDAOJDBC extends DAO<Carre> {
      * @param conn Connexion à la base de donnée
      * @throws SuppressionException En cas d'erreur lors de la suppression
      */
-    static void suppressAllBut(final Object[] noms, final int dessinID, final Connection conn)
-            throws SuppressionException {
+    static void suppressAllBut(final Object[] noms, final int dessinID,
+            final Connection conn) throws SuppressionException {
         try {
             if (tableExists("carre", conn)) {
-                String sql = "DELETE FROM carre "
-                        + "WHERE dessinID = ?";
+                String sql = "DELETE FROM carre " + "WHERE dessinID = ?";
                 for (int i = 0; i < noms.length; i++) {
                     sql = sql.concat(" AND nom <> ?");
                 }
-                try (PreparedStatement deleteCarre = conn
-                        .prepareStatement(sql)) {
-                    Object[] att = new Object[noms.length+1];
+                try (PreparedStatement deleteCarre =
+                        conn.prepareStatement(sql)) {
+                    Object[] att = new Object[noms.length + 1];
                     att[0] = dessinID;
                     for (int i = 0; i < noms.length; i++) {
                         att[i + 1] = noms[i];
@@ -436,12 +435,12 @@ public class CarreDAOJDBC extends DAO<Carre> {
      * @param conn Connexion à la base de donnée
      * @throws SuppressionException En cas d'erreur lors de la suppression
      */
-    static void suppress(final Carre obj, final int dessinID, final Connection conn)
-            throws SuppressionException {
+    static void suppress(final Carre obj, final int dessinID,
+            final Connection conn) throws SuppressionException {
         try {
             if (tableExists("carre", conn)) {
-                try (PreparedStatement deleteCarre = conn
-                        .prepareStatement("DELETE FROM carre "
+                try (PreparedStatement deleteCarre =
+                        conn.prepareStatement("DELETE FROM carre "
                                 + "WHERE nom = ? AND dessinID = ?")) {
                     remplitStatement(deleteCarre, obj.getNom(), dessinID);
                     deleteCarre.execute();

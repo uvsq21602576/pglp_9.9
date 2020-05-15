@@ -73,6 +73,14 @@ public class Rectangle extends Forme {
     }
 
     /**
+     * Retourne une copie du point bas droit du rectangle.
+     * @return Point bas droit
+     */
+    public Point getPointBasDroit() {
+        return basDroit.copie();
+    }
+
+    /**
      * Deplace le rectangle selon le vecteur de déplacement dP.
      * Déplace les deux points selon le même vecteur.
      * @param dP Vecteur de déplacement

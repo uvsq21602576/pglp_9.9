@@ -32,7 +32,7 @@ public class Dessin implements ComposantDessin {
     public void ajoute(final ComposantDessin c) {
         composantsFils.add(c);
     }
-    
+
     /**
      * Ajoute une liste de composants au dessin.
      * @param listeC Liste de composants à ajouter
@@ -106,10 +106,10 @@ public class Dessin implements ComposantDessin {
         }
         return true;
     }
-    
+
     /**
      * Retourne le nom du dessin.
-     * @return  Nom du dessin
+     * @return Nom du dessin
      */
     public String getNom() {
         return nom;

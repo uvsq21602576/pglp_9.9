@@ -19,7 +19,7 @@ public class Triangle extends Forme {
      * @param p2 Deuxième point
      * @param p3 Troisième point
      */
-    protected Triangle(final String n, final Point p1, final Point p2,
+    public Triangle(final String n, final Point p1, final Point p2,
             final Point p3) {
         super(n, p1);
         this.point2 = p2;
@@ -36,6 +36,22 @@ public class Triangle extends Forme {
         super.deplace(dP);
         this.point2.deplace(dP);
         this.point3.deplace(dP);
+    }
+
+    /**
+     * Retourne une copie du deuxième point du Triangle.
+     * @return Copie du deuxième point
+     */
+    public Point getPoint2() {
+        return this.point2.copie();
+    }
+
+    /**
+     * Retourne une copie du troisième point du Triangle.
+     * @return Copie du troisième point
+     */
+    public Point getPoint3() {
+        return this.point3.copie();
     }
 
     /**

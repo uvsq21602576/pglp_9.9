@@ -7,5 +7,5 @@
 	<!-- Fichiers test -->
 	<suppress checks="MagicNumber" files=".*[\\/]src[\\/](test|it)[\\/]"/> 
 	<!-- Classe Main -->
-	<suppress checks="MagicNumber" files=".*[\\/]src[\\/].*[\\/]Main.java"/> 
+	<suppress checks="MagicNumber" files=".*[\\/]src[\\/].*[\\/]TestJDBCMain.java"/> 
 </suppressions>

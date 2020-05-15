@@ -26,21 +26,21 @@ public class DessinTest {
         expected.add(c1);
         assertEquals(expected, d.getComposantsFils());
     }
-    
+
     /**
      * Teste l'ajouteTout.
      */
     @Test
     public void ajouteToutTest() {
         Dessin d = new Dessin("d1");
-        
+
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
         Carre c2 = new Carre("c2", new Point(9, 3), 10);
         ArrayList<ComposantDessin> actual = new ArrayList<>();
         actual.add(c1);
         actual.add(c2);
         d.ajouteTout(actual);
-        
+
         ArrayList<ComposantDessin> expected = new ArrayList<>();
         expected.add(c1);
         expected.add(c2);

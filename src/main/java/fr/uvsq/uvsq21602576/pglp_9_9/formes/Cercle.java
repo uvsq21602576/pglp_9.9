@@ -22,6 +22,14 @@ public class Cercle extends Forme {
     }
 
     /**
+     * Retourne le rayon du Cercle.
+     * @return Rayon du cercle
+     */
+    public int getRayon() {
+        return this.rayon;
+    }
+
+    /**
      * Retourne le haché correspondant.
      * @return Haché
      */
