@@ -1,9 +1,9 @@
 package fr.uvsq.uvsq21602576.pglp_9_9.ui.commande;
 
+import fr.uvsq.uvsq21602576.pglp_9_9.Etat;
 import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DejaExistantException;
 import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.NoFilsException;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.ComposantDessin;
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.Etat;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleException;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleException;
 
@@ -44,8 +44,7 @@ public class CommandeCopie implements CommandeUndoable {
      *         n'existe pas.
      */
     @Override
-    public void execute()
-            throws CommandeImpossibleException, UndoImpossibleException {
+    public void execute() throws CommandeImpossibleException {
         try {
             this.composantCopie = etat.getDessinCourant().copier(aCopie, copie);
         } catch (DejaExistantException | NoFilsException e) {

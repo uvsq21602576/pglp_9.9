@@ -1,6 +1,7 @@
 package fr.uvsq.uvsq21602576.pglp_9_9.ui.commande;
 
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.Historique;
+import fr.uvsq.uvsq21602576.pglp_9_9.Historique;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleException;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleException;
 
 /**
@@ -25,10 +26,14 @@ public class CommandeUndo implements Commande {
     /**
      * Execution.
      * Annule la dernieère commande de l'historique.
-     * @throws UndoImpossibleException En cas d'echec de l'annulation.
+     * @throws CommandeImpossibleException En cas d'echec de l'annulation.
      */
-    public void execute() throws UndoImpossibleException {
-        historique.retourArriere();
+    public void execute() throws CommandeImpossibleException {
+        try {
+            historique.retourArriere();
+        } catch (UndoImpossibleException e) {
+            throw new CommandeImpossibleException(e.getMessage());
+        }
         System.out.println("undo effectué");
     }
 

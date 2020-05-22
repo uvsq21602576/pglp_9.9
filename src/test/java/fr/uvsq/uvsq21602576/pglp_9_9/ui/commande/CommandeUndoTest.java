@@ -9,7 +9,7 @@ import java.io.PrintStream;
 
 import org.junit.Test;
 
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.Historique;
+import fr.uvsq.uvsq21602576.pglp_9_9.Historique;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleException;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleException;
 
@@ -22,18 +22,17 @@ public class CommandeUndoTest {
     /**
      * Teste l'execution.
      * Quand tout marche bien.
-     * @throws UndoImpossibleException En cas d'undo impossible.
+     * @throws CommandeImpossibleException En cas d'undo impossible.
      */
     @Test
-    public void executeTest() throws UndoImpossibleException {
+    public void executeTest() throws CommandeImpossibleException {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
         Historique h = new Historique();
         CommandeUndoable c = new CommandeUndoable() {
             @Override
-            public void execute() throws CommandeImpossibleException,
-                    UndoImpossibleException {
+            public void execute() throws CommandeImpossibleException {
             }
 
             @Override
@@ -67,7 +66,7 @@ public class CommandeUndoTest {
         try {
             undo.execute();
             fail("Expected UndoImpossibleException to be thrown");
-        } catch (UndoImpossibleException e) {
+        } catch (CommandeImpossibleException e) {
             String observed = outContent.toString().trim();
             assertTrue(observed.isEmpty());
         } finally {

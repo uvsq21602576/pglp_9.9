@@ -1,6 +1,6 @@
 package fr.uvsq.uvsq21602576.pglp_9_9.ui.commande;
 
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.Arret;
+import fr.uvsq.uvsq21602576.pglp_9_9.Arret;
 
 /**
  * Commande pour demander l'arret du programme.

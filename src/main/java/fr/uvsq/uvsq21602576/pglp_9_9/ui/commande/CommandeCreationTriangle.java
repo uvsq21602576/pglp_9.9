@@ -1,9 +1,9 @@
 package fr.uvsq.uvsq21602576.pglp_9_9.ui.commande;
 
+import fr.uvsq.uvsq21602576.pglp_9_9.Etat;
 import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DejaExistantException;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Point;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Triangle;
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.Etat;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleException;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleException;
 
@@ -20,6 +20,8 @@ public class CommandeCreationTriangle implements CommandeUndoable {
     private Object[] arguments;
     /** Triangle créé. */
     private Triangle triangle;
+    /** Nombre d'arguments necessaire à la création du triangle. */
+    private static final int NB_ARG_NECESSAIRE = 4;
 
     /**
      * Constructeur.
@@ -44,34 +46,39 @@ public class CommandeCreationTriangle implements CommandeUndoable {
      *         même nom.
      */
     @Override
-    public void execute()
-            throws CommandeImpossibleException, UndoImpossibleException {
-        if (arguments.length != 4) {
+    public void execute() throws CommandeImpossibleException {
+        if (arguments.length != NB_ARG_NECESSAIRE) {
             throw new CommandeImpossibleException("Mauvais nombre d'argument.");
         }
+        int iArg = 0;
         String nom;
-        if (arguments[0] instanceof String) {
-            nom = (String) arguments[0];
+        if (arguments[iArg] instanceof String) {
+            nom = (String) arguments[iArg];
         } else {
             throw new CommandeImpossibleException("Aucun nom saisi.");
         }
+        iArg++;
         Point p1;
-        if (arguments[1] instanceof Point) {
-            p1 = (Point) arguments[1];
+        if (arguments[iArg] instanceof Point) {
+            p1 = (Point) arguments[iArg];
         } else {
-            throw new CommandeImpossibleException("Aucun centre saisi.");
+            throw new CommandeImpossibleException("Aucun premier point saisi.");
         }
+        iArg++;
         Point p2;
-        if (arguments[2] instanceof Point) {
-            p2 = (Point) arguments[2];
+        if (arguments[iArg] instanceof Point) {
+            p2 = (Point) arguments[iArg];
         } else {
-            throw new CommandeImpossibleException("Aucun rayon saisi.");
+            throw new CommandeImpossibleException(
+                    "Aucun deuxième point saisi.");
         }
+        iArg++;
         Point p3;
-        if (arguments[3] instanceof Point) {
-            p3 = (Point) arguments[3];
+        if (arguments[iArg] instanceof Point) {
+            p3 = (Point) arguments[iArg];
         } else {
-            throw new CommandeImpossibleException("Aucun rayon saisi.");
+            throw new CommandeImpossibleException(
+                    "Aucun troisième point saisi.");
         }
         this.triangle = new Triangle(nom, p1, p2, p3);
         try {

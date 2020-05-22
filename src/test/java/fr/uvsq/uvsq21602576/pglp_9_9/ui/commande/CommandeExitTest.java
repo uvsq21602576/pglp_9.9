@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.Arret;
+import fr.uvsq.uvsq21602576.pglp_9_9.Arret;
 
 /**
  * Teste la commande Exit.

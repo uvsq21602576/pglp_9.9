@@ -36,7 +36,7 @@ public abstract class DAO<T> {
 
     /**
      * Pour la modification.
-     * @param obj objet modifié à réécrire
+     * @param obj Objet modifié à réécrire
      * @return object modifié
      * @throws InexistantException En cas d'objet inexistant
      * @throws MisAJourException En cas d'erreurs lors de la mise à jour
@@ -46,9 +46,9 @@ public abstract class DAO<T> {
 
     /**
      * Pour la suppression.
-     * @param obj objet à supprimer
+     * @param id Nom de l'objet à supprimer
      * @throws DeletionException En cas d'erreur lors de la suppression
      */
-    public abstract void delete(T obj) throws DeletionException;
+    public abstract void delete(String id) throws DeletionException;
 
 }

@@ -1,4 +1,4 @@
-package fr.uvsq.uvsq21602576.pglp_9_9.ui;
+package fr.uvsq.uvsq21602576.pglp_9_9;
 
 /**
  * Représente l'arret du programme.

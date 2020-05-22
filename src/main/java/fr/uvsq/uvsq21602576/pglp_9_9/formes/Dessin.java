@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DejaExistantException;
+import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DessinGlobalException;
 import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.NoFilsException;
 
 /**
@@ -18,17 +19,37 @@ public class Dessin implements ComposantDessin {
     /** Nom du dessin. */
     private String nom;
     /**
+     * Nom du dessin global.
+     * Englobant tout les dessins de l'application.
+     */
+    public static final String GLOBAL = "GLOBAL";
+
+    /**
      * Liste de composant de dessin.
      * Tous les composants ont des noms différents.
      */
     private HashMap<String, ComposantDessin> composantsFils;
 
     /**
+     * Constrcuteur.
+     * Crée le dessin global.
+     */
+    public Dessin() {
+        this.nom = GLOBAL;
+        this.composantsFils = new HashMap<>();
+    }
+
+    /**
      * Constructeur.
      * Crée un dessin vide avec un nom.
      * @param n Nom du dessin
+     * @throws DessinGlobalException Si le nom du dessin est GLOBAL
      */
-    public Dessin(final String n) {
+    public Dessin(final String n) throws DessinGlobalException {
+        if (n.equals(GLOBAL)) {
+            throw new DessinGlobalException(
+                    "Un dessin ne peut s'appeler \"GLOBAL\".");
+        }
         this.nom = n;
         this.composantsFils = new HashMap<>();
     }
@@ -39,7 +60,12 @@ public class Dessin implements ComposantDessin {
      */
     @Override
     public ComposantDessin copie() {
-        Dessin copie = new Dessin(this.nom);
+        Dessin copie;
+        try {
+            copie = new Dessin(this.nom);
+        } catch (DessinGlobalException e1) {
+            copie = new Dessin();
+        }
         for (ComposantDessin c : composantsFils.values()) {
             try {
                 copie.ajoute(c.copie());
@@ -92,7 +118,29 @@ public class Dessin implements ComposantDessin {
     public void retire(final ComposantDessin c) {
         this.composantsFils.remove(c.getNom(), c);
     }
-    
+
+    /**
+     * Retire un composant du dessin par l'intermédiaire de son nom.
+     * @param nomComposant Nom du composant à retirer
+     * @return Composant retiré
+     */
+    public ComposantDessin retire(final String nomComposant) {
+        return this.composantsFils.remove(nomComposant);
+    }
+
+    /**
+     * Retourne le composant au nom key présent dans le dessin.
+     * @param key Nom du composant
+     * @return Composant recherché
+     * @throws NoFilsException Si aucun composant n'existe à ce nom.
+     */
+    public ComposantDessin getComposant(final String key)
+            throws NoFilsException {
+        if (!this.composantsFils.containsKey(key)) {
+            throw new NoFilsException(key, nom);
+        }
+        return this.composantsFils.get(key);
+    }
 
     /**
      * Duplique un composant dans ce dessin.

@@ -1,8 +1,6 @@
 package fr.uvsq.uvsq21602576.pglp_9_9.ui.commande;
 
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.Etat;
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleException;
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleException;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.DrawingUI;
 
 /**
  * Commande.
@@ -11,16 +9,26 @@ import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleExcept
  */
 public class CommandeAfficheDessin implements Commande {
 
-    private Etat etat;
+    /**
+     * Interface Utilisateur.
+     */
+    private DrawingUI ui;
 
-    public CommandeAfficheDessin(final Etat e) {
-        this.etat = e;
+    /**
+     * Constrcuteur.
+     * Crée la commande avec l'interface utilisateur utilisé.
+     * @param dUI Interface utilisateur
+     */
+    public CommandeAfficheDessin(final DrawingUI dUI) {
+        this.ui = dUI;
     }
 
+    /**
+     * Affiche le dessin courant dans sa totalité.
+     */
     @Override
-    public void execute()
-            throws CommandeImpossibleException, UndoImpossibleException {
-        System.out.println(this.etat.getDessinCourant().toString());
+    public void execute() {
+        this.ui.afficheDessin();
     }
 
 }

@@ -1,10 +1,9 @@
 package fr.uvsq.uvsq21602576.pglp_9_9.ui.commande;
 
+import fr.uvsq.uvsq21602576.pglp_9_9.Etat;
 import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DejaExistantException;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Cercle;
-import fr.uvsq.uvsq21602576.pglp_9_9.formes.Dessin;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Point;
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.Etat;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleException;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleException;
 
@@ -20,6 +19,8 @@ public class CommandeCreationCercle implements CommandeUndoable {
     private Object[] arguments;
     /** Cercle créé. */
     private Cercle cercle;
+    /** Nombre d'arguments necessaire à la création du cercle. */
+    private static final int NB_ARG_NECESSAIRE = 3;
 
     /**
      * Constructeur.
@@ -42,26 +43,28 @@ public class CommandeCreationCercle implements CommandeUndoable {
      *         même nom.
      */
     @Override
-    public void execute()
-            throws CommandeImpossibleException, UndoImpossibleException {
-        if (arguments.length != 3) {
+    public void execute() throws CommandeImpossibleException {
+        if (arguments.length != NB_ARG_NECESSAIRE) {
             throw new CommandeImpossibleException("Mauvais nombre d'argument.");
         }
+        int iArg = 0;
         String nom;
-        if (arguments[0] instanceof String) {
-            nom = (String) arguments[0];
+        if (arguments[iArg] instanceof String) {
+            nom = (String) arguments[iArg];
         } else {
             throw new CommandeImpossibleException("Aucun nom saisi.");
         }
+        iArg++;
         Point centre;
-        if (arguments[1] instanceof Point) {
-            centre = (Point) arguments[1];
+        if (arguments[iArg] instanceof Point) {
+            centre = (Point) arguments[iArg];
         } else {
             throw new CommandeImpossibleException("Aucun centre saisi.");
         }
+        iArg++;
         int rayon;
-        if (arguments[2] instanceof Integer) {
-            rayon = (int) arguments[2];
+        if (arguments[iArg] instanceof Integer) {
+            rayon = (int) arguments[iArg];
         } else {
             throw new CommandeImpossibleException("Aucun rayon saisi.");
         }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DejaExistantException;
+import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DessinGlobalException;
 
 /**
  * Classe de tests pour Dessin.
@@ -17,11 +18,23 @@ import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DejaExistantException;
 public class DessinTest {
 
     /**
+     * Teste le lancement d'une exception à la construction.
+     * En cas de creation de dessin avec le meme nom que le global.
+     * @throws DessinGlobalException Si un dessin a le même nom que le global
+     */
+    @Test(expected = DessinGlobalException.class)
+    public void constructeurExceptionTest() throws DessinGlobalException {
+        Dessin d = new Dessin(Dessin.GLOBAL);
+    }
+
+    /**
      * Teste la copie.
      * @throws DejaExistantException si un nom déjà existant est ajouté
+     * @throws DessinGlobalException Si un dessin a le même nom que le global
      */
     @Test
-    public void copieTest() throws DejaExistantException {
+    public void copieTest()
+            throws DejaExistantException, DessinGlobalException {
         Dessin d = new Dessin("d1");
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
         d.ajoute(c1);
@@ -33,11 +46,12 @@ public class DessinTest {
 
     /**
      * Teste l'ajout.
-     * @throws DejaExistantException
      * @throws DejaExistantException si un nom déjà existant est ajouté
+     * @throws DessinGlobalException Si un dessin a le même nom que le global
      */
     @Test
-    public void ajouteTest() throws DejaExistantException {
+    public void ajouteTest()
+            throws DejaExistantException, DessinGlobalException {
         Dessin d = new Dessin("d1");
         assertTrue(d.getComposantsFils().isEmpty());
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
@@ -52,9 +66,11 @@ public class DessinTest {
      * Teste le lancement d'exception.
      * Quand deux objet de meme noms sont ajouté au meme dessin.
      * @throws DejaExistantException si un nom déjà existant est ajouté
+     * @throws DessinGlobalException Si un dessin a le même nom que le global
      */
     @Test(expected = DejaExistantException.class)
-    public void ajouteExceptionTest() throws DejaExistantException {
+    public void ajouteExceptionTest()
+            throws DejaExistantException, DessinGlobalException {
         Dessin d = new Dessin("d1");
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
         Carre c = new Carre("c1", new Point(2, 3), 10);
@@ -65,9 +81,11 @@ public class DessinTest {
     /**
      * Teste l'ajouteTout.
      * @throws DejaExistantException si un nom déjà existant est ajouté
+     * @throws DessinGlobalException Si un dessin a le même nom que le global
      */
     @Test
-    public void ajouteToutTest() throws DejaExistantException {
+    public void ajouteToutTest()
+            throws DejaExistantException, DessinGlobalException {
         Dessin d = new Dessin("d1");
 
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
@@ -88,9 +106,11 @@ public class DessinTest {
      * Teste l'ajouteTout.
      * En cas de deux noms identiques.
      * @throws DejaExistantException si un nom déjà existant est ajouté
+     * @throws DessinGlobalException Si un dessin a le même nom que le global
      */
     @Test(expected = DejaExistantException.class)
-    public void ajouteToutExceptionTest() throws DejaExistantException {
+    public void ajouteToutExceptionTest()
+            throws DejaExistantException, DessinGlobalException {
         Dessin d = new Dessin("d1");
 
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
@@ -105,9 +125,11 @@ public class DessinTest {
      * Teste le retirement.
      * @throws DejaExistantException si deux objet aux noms identiques sont
      *         ajouté dans dessin
+     * @throws DessinGlobalException Si un dessin a le même nom que le global
      */
     @Test
-    public void retireTest() throws DejaExistantException {
+    public void retireTest()
+            throws DejaExistantException, DessinGlobalException {
         Dessin d = new Dessin("d1");
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
         d.ajoute(c1);
@@ -122,12 +144,13 @@ public class DessinTest {
 
     /**
      * Teste le deplacement.
-     * @throws DejaExistantException
      * @throws DejaExistantException si deux objet aux noms identiques sont
      *         ajouté dans dessin
+     * @throws DessinGlobalException Si un dessin a le même nom que le global
      */
     @Test
-    public void deplaceTest() throws DejaExistantException {
+    public void deplaceTest()
+            throws DejaExistantException, DessinGlobalException {
         Dessin d = new Dessin("d1");
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
         d.ajoute(c1);

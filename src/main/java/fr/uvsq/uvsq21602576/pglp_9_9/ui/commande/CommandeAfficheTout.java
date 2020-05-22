@@ -1,21 +1,33 @@
 package fr.uvsq.uvsq21602576.pglp_9_9.ui.commande;
 
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.Etat;
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleException;
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleException;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.DrawingUI;
 
+/**
+ * Commande.
+ * Affiche tous les dessins présent dans le logiciel.
+ * @author Flora
+ */
 public class CommandeAfficheTout implements Commande {
 
-    private Etat etat;
+    /**
+     * Interface Utilisateur.
+     */
+    private DrawingUI ui;
 
-    public CommandeAfficheTout(final Etat e) {
-        this.etat = e;
+    /**
+     * Constrcuteur.
+     * Crée la commande avec l'interface utilisateur utilisé.
+     * @param dUI Interface utilisateur
+     */
+    public CommandeAfficheTout(final DrawingUI dUI) {
+        this.ui = dUI;
     }
 
+    /**
+     * Affiche tous les dessins présents.
+     */
     @Override
-    public void execute()
-            throws CommandeImpossibleException, UndoImpossibleException {
-        System.out.println(this.etat.getGlobal().toString());
+    public void execute() {
+        this.ui.afficheTout();
     }
-
 }

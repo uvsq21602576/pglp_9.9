@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import fr.uvsq.uvsq21602576.pglp_9_9.Etat;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Cercle;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.ComposantDessin;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Point;
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.Etat;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleException;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleException;
 

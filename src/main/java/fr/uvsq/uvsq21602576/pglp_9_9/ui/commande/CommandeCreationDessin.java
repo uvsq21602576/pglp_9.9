@@ -1,8 +1,9 @@
 package fr.uvsq.uvsq21602576.pglp_9_9.ui.commande;
 
+import fr.uvsq.uvsq21602576.pglp_9_9.Etat;
 import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DejaExistantException;
+import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DessinGlobalException;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Dessin;
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.Etat;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleException;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleException;
 
@@ -21,9 +22,9 @@ public class CommandeCreationDessin implements CommandeUndoable {
 
     /**
      * Constructeur.
-     * Crée la commande, avec le moteur et les arguments de création du carre.
+     * Crée la commande, avec le moteur et les arguments de création du dessin.
      * @param e Etat du logiciel
-     * @param n Nom du dessin 
+     * @param n Nom du dessin
      */
     public CommandeCreationDessin(final Etat e, final String n) {
         this.etat = e;
@@ -40,9 +41,12 @@ public class CommandeCreationDessin implements CommandeUndoable {
      *         même nom.
      */
     @Override
-    public void execute()
-            throws CommandeImpossibleException, UndoImpossibleException {
-        this.dessin = new Dessin(nom);
+    public void execute() throws CommandeImpossibleException {
+        try {
+            this.dessin = new Dessin(nom);
+        } catch (DessinGlobalException e) {
+            throw new CommandeImpossibleException(e.getMessage());
+        }
         try {
             this.etat.getDessinCourant().ajoute(this.dessin);
         } catch (DejaExistantException e) {

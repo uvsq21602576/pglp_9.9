@@ -9,6 +9,7 @@ import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.InexistantException;
 import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.MisAJourException;
 import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.RechercheException;
 import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DejaExistantException;
+import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DessinGlobalException;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Carre;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Cercle;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Dessin;
@@ -75,7 +76,7 @@ public enum TestJDBCMain {
 
         // DELETE
         try {
-            daoC.delete(c);
+            daoC.delete(c.getNom());
             System.out.println("Suppression réussie.");
         } catch (DeletionException e) {
             e.printStackTrace();
@@ -139,7 +140,7 @@ public enum TestJDBCMain {
 
         // DELETE
         try {
-            daoC.delete(c);
+            daoC.delete(c.getNom());
             System.out.println("Suppression réussie.");
         } catch (DeletionException e) {
             e.printStackTrace();
@@ -203,7 +204,7 @@ public enum TestJDBCMain {
 
         // DELETE
         try {
-            daoR.delete(r);
+            daoR.delete(r.getNom());
             System.out.println("Suppression réussie.");
         } catch (DeletionException e) {
             e.printStackTrace();
@@ -269,7 +270,7 @@ public enum TestJDBCMain {
 
         // DELETE
         try {
-            daoT.delete(t);
+            daoT.delete(t.getNom());
             System.out.println("Suppression réussie.");
         } catch (DeletionException e) {
             e.printStackTrace();
@@ -302,7 +303,12 @@ public enum TestJDBCMain {
                 new Point(45, 8));
         Triangle t2 = new Triangle("t2", new Point(50987, 48),
                 new Point(45987, 8), new Point(45, 8));
-        Dessin d = new Dessin("sousD");
+        Dessin d = null;
+        try {
+            d = new Dessin("sousD");
+        } catch (DessinGlobalException e2) {
+            System.err.println(e2.getMessage());
+        }
         try {
             d.ajoute(c2);
         } catch (DejaExistantException e1) {
@@ -328,23 +334,16 @@ public enum TestJDBCMain {
         } catch (DejaExistantException e1) {
             System.err.println(e1.getMessage());
         }
-        Dessin actual = new Dessin("actual");
+        Dessin actual = null;
         try {
+            actual = new Dessin("actual");
             actual.ajoute(ce2);
-        } catch (DejaExistantException e1) {
-            System.err.println(e1.getMessage());
-        }
-        try {
             actual.ajoute(c);
-        } catch (DejaExistantException e1) {
-            System.err.println(e1.getMessage());
-        }
-        try {
             actual.ajoute(d);
-        } catch (DejaExistantException e1) {
-            System.err.println(e1.getMessage());
+            System.out.println(actual.toString());
+        } catch (DessinGlobalException | DejaExistantException e2) {
+            System.err.println(e2.getMessage());
         }
-        System.out.println(actual.toString());
         try {
             daoD.create(actual);
             System.out.println("Creation réussie.");
@@ -399,7 +398,7 @@ public enum TestJDBCMain {
 
         // DELETE
         try {
-            daoD.delete(actual);
+            daoD.delete(actual.getNom());
             System.out.println("Suppression réussie.");
         } catch (DeletionException e) {
             e.printStackTrace();

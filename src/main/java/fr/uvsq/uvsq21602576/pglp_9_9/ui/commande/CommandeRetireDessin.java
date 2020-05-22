@@ -9,26 +9,26 @@ import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleEx
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleException;
 
 /**
- * Commande pour ajouter un composant dessin dans un dessin.
+ * Commande pour retirer un composant d'un sous-dessin.
  * @author Flora
  */
-public class CommandeAjouteDessin implements CommandeUndoable {
+public class CommandeRetireDessin implements CommandeUndoable {
     /** Etat actuel du logiciel. */
     private Etat etat;
-    /** Nom du composant à ajouter. */
+    /** Nom du composant à retirer. */
     private String nomComposant;
-    /** Nom du dessin où ajouter. */
+    /** Nom du dessin où retirer. */
     private String nomDessin;
 
     /**
      * Constructeur.
-     * Crée la commande, avec le moteur, le nom du composant à ajouter et le nom
+     * Crée la commande, avec le moteur, le nom du composant à retirer et le nom
      * du dessin.
      * @param e Etat du logiciel
-     * @param nom Nom du composant à ajouter
-     * @param dessin Nom du dessin où ajouter
+     * @param nom Nom du composant à retirer
+     * @param dessin Nom du dessin où retirer
      */
-    public CommandeAjouteDessin(final Etat e, final String nom,
+    public CommandeRetireDessin(final Etat e, final String nom,
             final String dessin) {
         this.etat = e;
         this.nomComposant = nom;
@@ -37,7 +37,7 @@ public class CommandeAjouteDessin implements CommandeUndoable {
 
     /**
      * Execute la commande.
-     * Deplace le composant du dessin courant au sous dessin indiqué.
+     * Deplace le composant du sous dessin indiqué au dessin courant.
      * @throws CommandeImpossibleException Si le dessin ou le composant n'existe
      *         pas, ou si un composant du même nom se trouve déjà dans dessin.
      */
@@ -56,18 +56,18 @@ public class CommandeAjouteDessin implements CommandeUndoable {
         }
         ComposantDessin c;
         try {
-            c = this.etat.getDessinCourant().getComposant(nomComposant);
+            c = ((Dessin) d).getComposant(nomComposant);
         } catch (NoFilsException e1) {
-            throw new CommandeImpossibleException(
-                    "Aucun composant " + nomComposant + ".");
+            throw new CommandeImpossibleException("Aucun composant "
+                    + nomComposant + " dans le dessin " + nomDessin + ".");
         }
         try {
-            ((Dessin) d).ajoute(c);
+            this.etat.getDessinCourant().ajoute(c);
         } catch (DejaExistantException e) {
             throw new CommandeImpossibleException("Un composant " + nomComposant
-                    + " existe déjà dans le dessin " + nomDessin + ".");
+                    + " existe déjà dans le dessin.");
         }
-        this.etat.getDessinCourant().retire(c);
+        ((Dessin) d).retire(c);
         this.etat.ajouteDansHistorique(this);
     }
 
@@ -90,18 +90,18 @@ public class CommandeAjouteDessin implements CommandeUndoable {
         }
         ComposantDessin c;
         try {
-            c = ((Dessin) d).getComposant(nomComposant);
+            c = this.etat.getDessinCourant().getComposant(nomComposant);
         } catch (NoFilsException e1) {
-            throw new UndoImpossibleException("Aucun composant " + nomComposant
-                    + " dans le dessin " + nomDessin + ".");
+            throw new UndoImpossibleException(
+                    "Aucun composant " + nomComposant + ".");
         }
         try {
-            this.etat.getDessinCourant().ajoute(c);
+            ((Dessin) d).ajoute(c);
         } catch (DejaExistantException e) {
             throw new UndoImpossibleException("Un composant " + nomComposant
-                    + " existe déjà dans le dessin.");
+                    + " existe déjà dans le dessin " + nomDessin + ".");
         }
-        ((Dessin) d).retire(c);
+        this.etat.getDessinCourant().retire(c);
     }
 
 }

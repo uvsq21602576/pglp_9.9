@@ -26,6 +26,7 @@ import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.RechercheException;
 import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.RemplissageStatementException;
 import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.SuppressionException;
 import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DejaExistantException;
+import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DessinGlobalException;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Carre;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Cercle;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.ComposantDessin;
@@ -234,9 +235,11 @@ public class DessinDAOJDBC extends DAO<Dessin> {
      * @param conn Connection à la base de donnée
      * @return List de Dessins lus
      * @throws LectureException En cas d'erreur lors de la lecture
+     * @throws DessinGlobalException Si un dessin est nommé comme le global
      */
     static List<ComposantDessin> readAll(final int globalID,
-            final Connection conn) throws LectureException {
+            final Connection conn)
+            throws LectureException, DessinGlobalException {
         ArrayList<ComposantDessin> listeDessin = new ArrayList<>();
         try {
             if (!tableExists("dessin", conn)) {
@@ -282,10 +285,11 @@ public class DessinDAOJDBC extends DAO<Dessin> {
      * @return Dessin lu
      * @throws LectureException En cas d'erreur lors de la lecture
      * @throws InexistantException Si le dessin id n'existe pas
+     * @throws DessinGlobalException Si un dessin est nommé comme le global
      */
     static Dessin read(final String id, final int globalID,
-            final Connection conn)
-            throws LectureException, InexistantException {
+            final Connection conn) throws LectureException, InexistantException,
+            DessinGlobalException {
         Dessin d = null;
         try {
             if (!tableExists("dessin", conn)) {
@@ -340,7 +344,7 @@ public class DessinDAOJDBC extends DAO<Dessin> {
                 conn.setAutoCommit(false);
                 result = read(id, -1, conn);
                 conn.commit();
-            } catch (JDBCException | SQLException e) {
+            } catch (JDBCException | SQLException | DessinGlobalException e) {
                 conn.rollback();
                 throw e;
             } finally {
@@ -348,7 +352,7 @@ public class DessinDAOJDBC extends DAO<Dessin> {
             }
         } catch (InexistantException e) {
             throw e;
-        } catch (JDBCException | SQLException e) {
+        } catch (JDBCException | SQLException | DessinGlobalException e) {
             throw new RechercheException(id, e.getMessage());
         }
         return result;
@@ -601,19 +605,19 @@ public class DessinDAOJDBC extends DAO<Dessin> {
      * Supprime le dessin obj de la base de donnée.
      * Supprime aussi son contenu.
      * Accessible par son nom et l'id de son dessin.
-     * @param obj Objet à supprimer
+     * @param id Nom de l'objet à supprimer
      * @param globalID ID du dessin global auquel le dessin appartient
      * @param conn Connexion à la base de donnée
      * @throws SuppressionException En cas d'erreur lors de la suppression
      */
-    static void suppress(final Dessin obj, final int globalID,
+    static void suppress(final String id, final int globalID,
             final Connection conn) throws SuppressionException {
         try {
             if (tableExists("dessin", conn)) {
                 try (PreparedStatement selectDessin =
                         conn.prepareStatement("SELECT * FROM dessin "
                                 + "WHERE nom = ? AND globalID = ?")) {
-                    remplitStatement(selectDessin, obj.getNom(), globalID);
+                    remplitStatement(selectDessin, id, globalID);
                     try (ResultSet rs = selectDessin.executeQuery()) {
                         if (rs.next()) {
                             int dessinID = rs.getInt("dessinID");
@@ -634,22 +638,22 @@ public class DessinDAOJDBC extends DAO<Dessin> {
             }
         } catch (SQLException | RemplissageStatementException
                 | MetaDataException e) {
-            throw new SuppressionException(obj.getNom(), e.getMessage());
+            throw new SuppressionException(id, e.getMessage());
         }
     }
 
     /**
      * Efface le dessin obj de la base de donnée.
      * Accessible par son nom.
-     * @param obj Objet à effacer
+     * @param id Nom de l'objet à effacer
      * @throws DeletionException En cas d'erreur lors de l'effacement
      */
     @Override
-    public void delete(final Dessin obj) throws DeletionException {
+    public void delete(final String id) throws DeletionException {
         try (Connection conn = getConnection()) {
             try {
                 conn.setAutoCommit(false);
-                suppress(obj, -1, conn);
+                suppress(id, -1, conn);
                 conn.commit();
             } catch (JDBCException | SQLException e) {
                 conn.rollback();
@@ -658,7 +662,7 @@ public class DessinDAOJDBC extends DAO<Dessin> {
                 conn.setAutoCommit(true);
             }
         } catch (JDBCException | SQLException e) {
-            throw new DeletionException(obj.getNom(), e.getMessage());
+            throw new DeletionException(id, e.getMessage());
         }
     }
 }

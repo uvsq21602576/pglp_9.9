@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import fr.uvsq.uvsq21602576.pglp_9_9.Historique;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeUndoable;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleException;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleException;
@@ -26,8 +27,7 @@ public class HistoriqueTest {
         Historique h = new Historique();
         CommandeUndoable c = new CommandeUndoable() {
             @Override
-            public void execute() throws CommandeImpossibleException,
-                    UndoImpossibleException {
+            public void execute() throws CommandeImpossibleException {
             }
 
             @Override
@@ -50,8 +50,7 @@ public class HistoriqueTest {
         Historique h = new Historique();
         CommandeUndoable c = new CommandeUndoable() {
             @Override
-            public void execute() throws CommandeImpossibleException,
-                    UndoImpossibleException {
+            public void execute() throws CommandeImpossibleException {
             }
 
             @Override
@@ -84,8 +83,7 @@ public class HistoriqueTest {
         Historique h = new Historique();
         CommandeUndoable c = new CommandeUndoable() {
             @Override
-            public void execute() throws CommandeImpossibleException,
-                    UndoImpossibleException {
+            public void execute() throws CommandeImpossibleException {
             }
 
             @Override

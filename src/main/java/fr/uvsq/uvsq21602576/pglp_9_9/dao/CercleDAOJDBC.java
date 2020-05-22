@@ -429,40 +429,40 @@ public class CercleDAOJDBC extends DAO<Cercle> {
     /**
      * Supprime le cercle obj de la base de donnée.
      * Accessible par son nom et l'id de son dessin.
-     * @param obj Objet à supprimer
+     * @param id Nom de l'objet à supprimer
      * @param dessinID ID du dessin auquel la forme appartient
      * @param conn Connexion à la base de donnée
      * @throws SuppressionException En cas d'erreur lors de la suppression
      */
-    static void suppress(final Cercle obj, final int dessinID,
+    static void suppress(final String id, final int dessinID,
             final Connection conn) throws SuppressionException {
         try {
             if (tableExists("cercle", conn)) {
                 try (PreparedStatement deleteCercle =
                         conn.prepareStatement("DELETE FROM cercle "
                                 + "WHERE nom = ? AND dessinID = ?")) {
-                    remplitStatement(deleteCercle, obj.getNom(), dessinID);
+                    remplitStatement(deleteCercle, id, dessinID);
                     deleteCercle.execute();
                 }
             }
         } catch (SQLException | RemplissageStatementException
                 | MetaDataException e) {
-            throw new SuppressionException(obj.getNom(), e.getMessage());
+            throw new SuppressionException(id, e.getMessage());
         }
     }
 
     /**
      * Efface le cercle obj de la base de donnée.
      * Accessible par son nom.
-     * @param obj Objet à effacer
+     * @param id Nom de l'objet à effacer
      * @throws DeletionException En cas d'erreur lors de l'effacement
      */
     @Override
-    public void delete(final Cercle obj) throws DeletionException {
+    public void delete(final String id) throws DeletionException {
         try (Connection conn = getConnection()) {
             try {
                 conn.setAutoCommit(false);
-                suppress(obj, -1, conn);
+                suppress(id, -1, conn);
                 conn.commit();
             } catch (JDBCException | SQLException e) {
                 conn.rollback();
@@ -471,7 +471,7 @@ public class CercleDAOJDBC extends DAO<Cercle> {
                 conn.setAutoCommit(true);
             }
         } catch (JDBCException | SQLException e) {
-            throw new DeletionException(obj.getNom(), e.getMessage());
+            throw new DeletionException(id, e.getMessage());
         }
     }
 
