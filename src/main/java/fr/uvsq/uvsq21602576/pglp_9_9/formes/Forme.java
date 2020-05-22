@@ -56,6 +56,14 @@ public abstract class Forme implements ComposantDessin {
     }
 
     /**
+     * Change le nom de la forme pour celui en paramètre.
+     * @param n Nouveau de la forme
+     */
+    public void setNom(final String n) {
+        this.nom = n;
+    }
+
+    /**
      * Retourne le haché correspondant.
      * @return Haché
      */

@@ -1,6 +1,7 @@
 package fr.uvsq.uvsq21602576.pglp_9_9.formes;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
@@ -9,6 +10,17 @@ import org.junit.Test;
  * @author Flora
  */
 public class RectangleTest {
+
+    /**
+     * Teste la copie.
+     */
+    @Test
+    public void copieTest() {
+        Rectangle r = new Rectangle("r1", new Point(0, 0), new Point(3, 4));
+        Rectangle copie = (Rectangle) r.copie();
+        assertFalse(r == copie);
+        assertEquals(r, copie);
+    }
 
     /**
      * Teste le déplacement.

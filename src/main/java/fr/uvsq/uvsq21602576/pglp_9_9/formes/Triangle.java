@@ -55,6 +55,16 @@ public class Triangle extends Forme {
     }
 
     /**
+     * Renvoie la copie exacte du triangle.
+     * @return Copie exacte du triangle
+     */
+    @Override
+    public ComposantDessin copie() {
+        return new Triangle(super.getNom(), super.getPointReference(),
+                this.point2, this.point3);
+    }
+
+    /**
      * Retourne le haché correspondant.
      * @return Haché
      */

@@ -19,6 +19,16 @@ public class Carre extends Rectangle {
     }
 
     /**
+     * Renvoie la copie exacte du carre.
+     * @return Copie exacte du carre
+     */
+    @Override
+    public ComposantDessin copie() {
+        return new Carre(super.getNom(), super.getPointReference(),
+                super.getLongueur());
+    }
+
+    /**
      * Retourne le haché correspondant.
      * @return Haché
      */

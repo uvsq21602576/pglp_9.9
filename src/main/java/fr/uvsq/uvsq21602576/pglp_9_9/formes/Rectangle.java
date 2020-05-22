@@ -22,6 +22,16 @@ public class Rectangle extends Forme {
     }
 
     /**
+     * Renvoie la copie exacte du rectangle.
+     * @return Copie exacte du rectangle
+     */
+    @Override
+    public ComposantDessin copie() {
+        return new Rectangle(super.getNom(), super.getPointReference(),
+                this.basDroit);
+    }
+
+    /**
      * Retourne le haché correspondant.
      * @return Haché
      */

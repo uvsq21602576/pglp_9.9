@@ -8,6 +8,7 @@ import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.DoublonException;
 import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.InexistantException;
 import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.MisAJourException;
 import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.RechercheException;
+import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DejaExistantException;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Carre;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Cercle;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Dessin;
@@ -302,15 +303,47 @@ public enum TestJDBCMain {
         Triangle t2 = new Triangle("t2", new Point(50987, 48),
                 new Point(45987, 8), new Point(45, 8));
         Dessin d = new Dessin("sousD");
-        d.ajoute(c2);
-        d.ajoute(r);
-        d.ajoute(r2);
-        d.ajoute(ce);
-        d.ajoute(t2);
+        try {
+            d.ajoute(c2);
+        } catch (DejaExistantException e1) {
+            System.err.println(e1.getMessage());
+        }
+        try {
+            d.ajoute(r);
+        } catch (DejaExistantException e1) {
+            System.err.println(e1.getMessage());
+        }
+        try {
+            d.ajoute(r2);
+        } catch (DejaExistantException e1) {
+            System.err.println(e1.getMessage());
+        }
+        try {
+            d.ajoute(ce);
+        } catch (DejaExistantException e1) {
+            System.err.println(e1.getMessage());
+        }
+        try {
+            d.ajoute(t2);
+        } catch (DejaExistantException e1) {
+            System.err.println(e1.getMessage());
+        }
         Dessin actual = new Dessin("actual");
-        actual.ajoute(ce2);
-        actual.ajoute(c);
-        actual.ajoute(d);
+        try {
+            actual.ajoute(ce2);
+        } catch (DejaExistantException e1) {
+            System.err.println(e1.getMessage());
+        }
+        try {
+            actual.ajoute(c);
+        } catch (DejaExistantException e1) {
+            System.err.println(e1.getMessage());
+        }
+        try {
+            actual.ajoute(d);
+        } catch (DejaExistantException e1) {
+            System.err.println(e1.getMessage());
+        }
         System.out.println(actual.toString());
         try {
             daoD.create(actual);
@@ -332,10 +365,18 @@ public enum TestJDBCMain {
 
         // UPDATE
         Carre cM = new Carre("cM", new Point(5, 48), 22);
-        actual.ajoute(cM);
+        try {
+            actual.ajoute(cM);
+        } catch (DejaExistantException e1) {
+            System.err.println(e1.getMessage());
+        }
         actual.retire(c);
         actual.retire(ce2);
-        actual.ajoute(t);
+        try {
+            actual.ajoute(t);
+        } catch (DejaExistantException e1) {
+            System.err.println(e1.getMessage());
+        }
         d.retire(r2);
         d.deplace(new Point(-1, -1));
         System.out.println("Modifié : " + actual.toString());

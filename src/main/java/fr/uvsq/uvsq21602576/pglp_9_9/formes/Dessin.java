@@ -1,8 +1,13 @@
 package fr.uvsq.uvsq21602576.pglp_9_9.formes;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+
+import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DejaExistantException;
+import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.NoFilsException;
 
 /**
  * Représente un Dessin.
@@ -12,8 +17,11 @@ import java.util.List;
 public class Dessin implements ComposantDessin {
     /** Nom du dessin. */
     private String nom;
-    /** Liste de composant de dessin. **/
-    private ArrayList<ComposantDessin> composantsFils;
+    /**
+     * Liste de composant de dessin.
+     * Tous les composants ont des noms différents.
+     */
+    private HashMap<String, ComposantDessin> composantsFils;
 
     /**
      * Constructeur.
@@ -22,23 +30,59 @@ public class Dessin implements ComposantDessin {
      */
     public Dessin(final String n) {
         this.nom = n;
-        this.composantsFils = new ArrayList<>();
+        this.composantsFils = new HashMap<>();
+    }
+
+    /**
+     * Renvoie la copie exacte du dessin.
+     * @return Copie exacte du dessin
+     */
+    @Override
+    public ComposantDessin copie() {
+        Dessin copie = new Dessin(this.nom);
+        for (ComposantDessin c : composantsFils.values()) {
+            try {
+                copie.ajoute(c.copie());
+            } catch (DejaExistantException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+        return copie;
     }
 
     /**
      * Ajoute un composant au dessin.
      * @param c Composant à ajouter
+     * @throws DejaExistantException Si un composant du meme nom existe déjà
+     *         dans le dessin
      */
-    public void ajoute(final ComposantDessin c) {
-        composantsFils.add(c);
+    public void ajoute(final ComposantDessin c) throws DejaExistantException {
+        if (composantsFils.containsKey(c.getNom())) {
+            throw new DejaExistantException(c.getNom(), this.nom);
+        }
+        composantsFils.put(c.getNom(), c);
     }
 
     /**
      * Ajoute une liste de composants au dessin.
      * @param listeC Liste de composants à ajouter
+     * @throws DejaExistantException Si un composant de la liste est déjà dans
+     *         le dessin, ou si plusieurs composant avec un meme noms se trouve
+     *         dans la liste.
      */
-    public void ajouteTout(final List<ComposantDessin> listeC) {
-        composantsFils.addAll(listeC);
+    public void ajouteTout(final List<ComposantDessin> listeC)
+            throws DejaExistantException {
+        ArrayList<String> listeNom = new ArrayList<>();
+        for (ComposantDessin c : listeC) {
+            if (composantsFils.containsKey(c.getNom())
+                    || listeNom.contains(c.getNom())) {
+                throw new DejaExistantException(c.getNom(), this.nom);
+            }
+            listeNom.add(c.getNom());
+        }
+        for (ComposantDessin c : listeC) {
+            composantsFils.put(c.getNom(), c);
+        }
     }
 
     /**
@@ -46,7 +90,44 @@ public class Dessin implements ComposantDessin {
      * @param c Composant à retirer
      */
     public void retire(final ComposantDessin c) {
-        this.composantsFils.remove(c);
+        this.composantsFils.remove(c.getNom(), c);
+    }
+    
+
+    /**
+     * Duplique un composant dans ce dessin.
+     * @param aCopier Nom du composant à copier
+     * @param copie Nom de la copie
+     * @return Copie du composant
+     * @throws DejaExistantException Si un composant du nom de la copie existe
+     *         déjà
+     * @throws NoFilsException Si aucun composant du nom de aCopier existe
+     */
+    public ComposantDessin copier(final String aCopier, final String copie)
+            throws DejaExistantException, NoFilsException {
+        if (composantsFils.containsKey(copie)) {
+            throw new DejaExistantException(copie, this.nom);
+        }
+        if (!composantsFils.containsKey(aCopier)) {
+            throw new NoFilsException(aCopier, this.nom);
+        }
+        ComposantDessin c = this.composantsFils.get(aCopier).copie();
+        c.setNom(copie);
+        this.ajoute(c);
+        return c;
+    }
+
+    /**
+     * Deplace un certain composant Fils.
+     * @param n Nom du composant fils à déplacer
+     * @param dP vecteur de déplacement
+     * @throws NoFilsException Si aucun fils de ce nom existe
+     */
+    public void deplace(final String n, final Point dP) throws NoFilsException {
+        if (!composantsFils.containsKey(n)) {
+            throw new NoFilsException(n, this.nom);
+        }
+        this.composantsFils.get(n).deplace(dP);
     }
 
     /**
@@ -55,7 +136,7 @@ public class Dessin implements ComposantDessin {
      */
     @Override
     public void deplace(final Point dP) {
-        for (ComposantDessin c : composantsFils) {
+        for (ComposantDessin c : composantsFils.values()) {
             c.deplace(dP);
         }
     }
@@ -116,11 +197,19 @@ public class Dessin implements ComposantDessin {
     }
 
     /**
-     * Retourne la liste de Composant, non modifiable.
-     * @return liste non modifibale de composants
+     * Change le nom du dessin pour celui en paramètre.
+     * @param n Nouveau du dessin
      */
-    public List<ComposantDessin> getComposantsFils() {
-        return Collections.unmodifiableList(this.composantsFils);
+    public void setNom(final String n) {
+        this.nom = n;
+    }
+
+    /**
+     * Retourne la collection de Composant, non modifiable.
+     * @return collection non modifibale de composants
+     */
+    public Collection<ComposantDessin> getComposantsFils() {
+        return Collections.unmodifiableCollection(this.composantsFils.values());
     }
 
     /**
@@ -146,10 +235,11 @@ public class Dessin implements ComposantDessin {
             s = s.concat("    ");
         }
         s = s.concat("|- " + this.nom + " :\n");
-        for (ComposantDessin c : composantsFils) {
+        for (ComposantDessin c : composantsFils.values()) {
             s = s.concat(c.toString(profondeur + 1));
             s = s.concat("\n");
         }
         return s;
     }
+
 }

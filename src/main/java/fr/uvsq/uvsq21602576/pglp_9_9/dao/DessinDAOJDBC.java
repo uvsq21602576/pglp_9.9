@@ -25,6 +25,7 @@ import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.ModificationException;
 import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.RechercheException;
 import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.RemplissageStatementException;
 import fr.uvsq.uvsq21602576.pglp_9_9.dao.exceptions.SuppressionException;
+import fr.uvsq.uvsq21602576.pglp_9_9.exceptions.DejaExistantException;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Carre;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Cercle;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.ComposantDessin;
@@ -265,7 +266,8 @@ public class DessinDAOJDBC extends DAO<Dessin> {
                     }
                 }
             }
-        } catch (SQLException | RemplissageStatementException e) {
+        } catch (SQLException | RemplissageStatementException
+                | DejaExistantException e) {
             throw new LectureException("dessins", e.getMessage());
         }
         return listeDessin;
@@ -314,7 +316,8 @@ public class DessinDAOJDBC extends DAO<Dessin> {
                     }
                 }
             }
-        } catch (SQLException | RemplissageStatementException e) {
+        } catch (SQLException | RemplissageStatementException
+                | DejaExistantException e) {
             throw new LectureException(id, e.getMessage());
         }
         return d;

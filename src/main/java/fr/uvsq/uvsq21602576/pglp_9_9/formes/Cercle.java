@@ -30,6 +30,16 @@ public class Cercle extends Forme {
     }
 
     /**
+     * Renvoie la copie exacte du cercle.
+     * @return Copie exacte du cercle
+     */
+    @Override
+    public ComposantDessin copie() {
+        return new Cercle(super.getNom(), super.getPointReference(),
+                this.rayon);
+    }
+
+    /**
      * Retourne le haché correspondant.
      * @return Haché
      */
@@ -93,4 +103,5 @@ public class Cercle extends Forme {
         s = s.concat("|-");
         return s.concat(this.toString());
     }
+
 }
