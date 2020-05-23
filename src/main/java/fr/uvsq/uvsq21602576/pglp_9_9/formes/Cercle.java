@@ -100,7 +100,7 @@ public class Cercle extends Forme {
         for (int i = 0; i < profondeur; i++) {
             s = s.concat("    ");
         }
-        s = s.concat("|-");
+        s = s.concat("|- ");
         return s.concat(this.toString());
     }
 

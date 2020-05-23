@@ -42,22 +42,6 @@ public class CommandeCreationTriangleTest {
     }
 
     /**
-     * Teste l'execution, avec un point manquant.
-     * @throws CommandeImpossibleException En cas de problème lors de
-     *         l'execution de la commande
-     * @throws UndoImpossibleException En cas de problème lors de l'annulation
-     *         de la commande
-     */
-    @Test(expected = CommandeImpossibleException.class)
-    public void executeMauvaisArgumentTest()
-            throws CommandeImpossibleException, UndoImpossibleException {
-        Etat etat = new Etat();
-        Commande c = new CommandeCreationTriangle(etat, "C", new Point(1, 2),
-                new Point(1, 2));
-        c.execute();
-    }
-
-    /**
      * Teste l'annulation de la commande.
      * @throws CommandeImpossibleException En cas de problème lors de
      *         l'execution de la commande

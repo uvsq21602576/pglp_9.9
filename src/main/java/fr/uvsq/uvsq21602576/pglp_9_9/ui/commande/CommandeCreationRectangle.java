@@ -16,63 +16,41 @@ import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleExcept
 public class CommandeCreationRectangle implements CommandeUndoable {
     /** Etat actuel du logiciel. */
     private Etat etat;
-    /** Arguments devant permttre la creation du rectangle. */
-    private Object[] arguments;
+    /** Nom de la variable. */
+    private String variable;
+    /** Point haut-gauche. */
+    private Point hg;
+    /** Point bas-droit. */
+    private Point bd;
     /** Rectangle créé. */
     private Rectangle rectangle;
-    /** Nombre d'arguments necessaire à la création du rectangle. */
-    private static final int NB_ARG_NECESSAIRE = 3;
 
     /**
      * Constructeur.
      * Crée la commande, avec le moteur et les arguments de création du
      * rectangle.
      * @param e Etat du logiciel
-     * @param args Arguments de création du rectangle : String, Point, Point
+     * @param v Nom de la variable
+     * @param p1 Point haut-gauche
+     * @param p2 Point bas-droit
      */
-    public CommandeCreationRectangle(final Etat e, final Object... args) {
+    public CommandeCreationRectangle(final Etat e, final String v, final Point p1, final Point p2) {
         this.etat = e;
-        this.arguments = args;
+        this.variable = v;
+        this.hg = p1;
+        this.bd = p2;
         rectangle = null;
     }
 
     /**
      * Execute la commande.
-     * Crée un rectangle avec les arguments ennoncé, si cela est possible
+     * Crée un rectangle avec les arguments ennoncé
      * et l'insert dans le dessin courant.
-     * @throws CommandeImpossibleException Si les arguments ne sont pas du bon
-     *         type, ou bon nombre. Ou si le dessin courant a déjà une forme du
-     *         même nom.
+     * @throws CommandeImpossibleException Si le dessin courant a déjà une forme du même nom.
      */
     @Override
     public void execute() throws CommandeImpossibleException {
-        if (arguments.length != NB_ARG_NECESSAIRE) {
-            throw new CommandeImpossibleException("Mauvais nombre d'argument.");
-        }
-        int iArg = 0;
-        String nom;
-        if (arguments[iArg] instanceof String) {
-            nom = (String) arguments[iArg];
-        } else {
-            throw new CommandeImpossibleException("Aucun nom saisi.");
-        }
-        iArg++;
-        Point hg;
-        if (arguments[iArg] instanceof Point) {
-            hg = (Point) arguments[iArg];
-        } else {
-            throw new CommandeImpossibleException(
-                    "Aucun point haut-gauche saisi.");
-        }
-        iArg++;
-        Point bd;
-        if (arguments[iArg] instanceof Point) {
-            bd = (Point) arguments[iArg];
-        } else {
-            throw new CommandeImpossibleException(
-                    "Aucun point bas-droit saisi.");
-        }
-        this.rectangle = new Rectangle(nom, hg, bd);
+        this.rectangle = new Rectangle(variable, hg, bd);
         try {
             this.etat.getDessinCourant().ajoute(this.rectangle);
         } catch (DejaExistantException e) {

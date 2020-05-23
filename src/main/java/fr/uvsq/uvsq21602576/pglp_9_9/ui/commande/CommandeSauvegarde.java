@@ -46,6 +46,9 @@ public class CommandeSauvegarde implements Commande {
     @Override
     public void execute() throws CommandeImpossibleException {
         Dessin aSauv = this.etat.getTotaliteDessinCourant();
+        if (aSauv.getNom().equals(Dessin.GLOBAL)) {
+            throw new CommandeImpossibleException("Aucun dessin à sauvegarder.");
+        }
         DAO<Dessin> daoD = FabriqueDAO.getFabriqueDAO(FabriqueDAO.TypeDAO.JDBC)
                 .getDessinDAO();
         try {

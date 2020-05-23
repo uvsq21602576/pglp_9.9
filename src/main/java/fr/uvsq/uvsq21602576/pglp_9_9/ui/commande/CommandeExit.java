@@ -1,6 +1,6 @@
 package fr.uvsq.uvsq21602576.pglp_9_9.ui.commande;
 
-import fr.uvsq.uvsq21602576.pglp_9_9.Arret;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.DrawingUI;
 
 /**
  * Commande pour demander l'arret du programme.
@@ -8,18 +8,18 @@ import fr.uvsq.uvsq21602576.pglp_9_9.Arret;
  */
 public class CommandeExit implements Commande {
     /**
-     * Arret.
-     * Stocke si e programme doit s'arreter ou non.
+     * Interface utilisateur.
+     * Pour arreter le programme et prévenir l'utilisateur.
      */
-    private Arret arret;
+    private DrawingUI ui;
 
     /**
      * Constructeur.
-     * Crée une commande avec l'arret.
-     * @param arret2 Arret
+     * Crée une commande avec l'iterface utilisateur
+     * @param dUI Interface utilisateur
      */
-    public CommandeExit(final Arret arret2) {
-        this.arret = arret2;
+    public CommandeExit(final DrawingUI dUI) {
+        this.ui = dUI;
     }
 
     /**
@@ -27,7 +27,7 @@ public class CommandeExit implements Commande {
      * En modifiant Arret.
      */
     public void execute() {
-        this.arret.setArret();
+        this.ui.arrete();
     }
 
 }

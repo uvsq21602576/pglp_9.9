@@ -55,8 +55,8 @@ public class Etat {
      * Retourne l'historique.
      * @return Historique
      */
-    public List<CommandeUndoable> getHistorique() {
-        return historique.getHistorique();
+    public Historique getHistorique() {
+        return historique;
     }
 
     /**

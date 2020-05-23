@@ -15,60 +15,45 @@ import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleExcept
 public class CommandeCreationCercle implements CommandeUndoable {
     /** Etat actuel du logiciel. */
     private Etat etat;
-    /** Arguments devant permttre la creation du cercle. */
-    private Object[] arguments;
+    /** Nom de la variable. */
+    private String variable;
+    /** Centre. */
+    private Point centre;
+    /** Rayon. */
+    private int rayon;
     /** Cercle créé. */
     private Cercle cercle;
-    /** Nombre d'arguments necessaire à la création du cercle. */
-    private static final int NB_ARG_NECESSAIRE = 3;
 
     /**
      * Constructeur.
      * Crée la commande, avec le moteur et les arguments de création du cercle.
      * @param e Etat du logiciel
-     * @param args Arguments de création du cercle : String, Point, int
+     * @param v Nom de la variable
+     * @param p Centre du cercle
+     * @param r Rayon du cercle
      */
-    public CommandeCreationCercle(final Etat e, final Object... args) {
+    public CommandeCreationCercle(final Etat e, final String v, final Point p,
+            final int r) {
         this.etat = e;
-        this.arguments = args;
+        this.variable = v;
+        this.centre = p;
+        this.rayon = r;
         cercle = null;
     }
 
     /**
      * Execute la commande.
-     * Crée un cercle avec les arguments ennoncé, si cela est possible
+     * Crée un cercle avec les arguments ennoncé
      * et l'insert dans le dessin courant.
-     * @throws CommandeImpossibleException Si les arguments ne sont pas du bon
-     *         type, ou bon nombre. Ou si le dessin courant a déjà une forme du
-     *         même nom.
+     * @throws CommandeImpossibleException Si le dessin courant a déjà une forme
+     *         du même nom.
      */
     @Override
     public void execute() throws CommandeImpossibleException {
-        if (arguments.length != NB_ARG_NECESSAIRE) {
-            throw new CommandeImpossibleException("Mauvais nombre d'argument.");
+        if (rayon < 0) {
+            throw new CommandeImpossibleException("Le rayon d'un cercle est positif.");
         }
-        int iArg = 0;
-        String nom;
-        if (arguments[iArg] instanceof String) {
-            nom = (String) arguments[iArg];
-        } else {
-            throw new CommandeImpossibleException("Aucun nom saisi.");
-        }
-        iArg++;
-        Point centre;
-        if (arguments[iArg] instanceof Point) {
-            centre = (Point) arguments[iArg];
-        } else {
-            throw new CommandeImpossibleException("Aucun centre saisi.");
-        }
-        iArg++;
-        int rayon;
-        if (arguments[iArg] instanceof Integer) {
-            rayon = (int) arguments[iArg];
-        } else {
-            throw new CommandeImpossibleException("Aucun rayon saisi.");
-        }
-        this.cercle = new Cercle(nom, centre, rayon);
+        this.cercle = new Cercle(variable, centre, rayon);
         try {
             this.etat.getDessinCourant().ajoute(this.cercle);
         } catch (DejaExistantException e) {

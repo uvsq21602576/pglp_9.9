@@ -456,6 +456,8 @@ public class DessinDAOJDBC extends DAO<Dessin> {
                 }
             }
 
+        } catch (InexistantException e) {
+            throw e;
         } catch (SQLException | JDBCException e) {
             throw new ModificationException(obj.getNom(), e.getMessage());
         }

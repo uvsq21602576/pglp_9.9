@@ -41,22 +41,6 @@ public class CommandeCreationRectangleTest {
     }
 
     /**
-     * Teste l'execution, avec un entier au lieu d'un point dans les arguments.
-     * @throws CommandeImpossibleException En cas de problème lors de
-     *         l'execution de la commande
-     * @throws UndoImpossibleException En cas de problème lors de l'annulation
-     *         de la commande
-     */
-    @Test(expected = CommandeImpossibleException.class)
-    public void executeMauvaisArgumentTest()
-            throws CommandeImpossibleException, UndoImpossibleException {
-        Etat etat = new Etat();
-        Commande c =
-                new CommandeCreationRectangle(etat, "C", new Point(1, 2), 10);
-        c.execute();
-    }
-
-    /**
      * Teste l'annulation de la commande.
      * @throws CommandeImpossibleException En cas de problème lors de
      *         l'execution de la commande
