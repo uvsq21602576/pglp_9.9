@@ -1,6 +1,7 @@
 package fr.uvsq.uvsq21602576.pglp_9_9;
 
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.DrawingTUI;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.LigneVideException;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.Commande;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleException;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.MauvaiseUtilisationException;
@@ -25,7 +26,10 @@ public enum DrawingApp {
                 c = tui.nextCommand();
                 c.execute();
                 tui.afficheDessin();
-            } catch (CommandeImpossibleException | NoCommandException | MauvaiseUtilisationException e) {
+            } catch (LigneVideException e) {
+
+            } catch (CommandeImpossibleException | NoCommandException
+                    | MauvaiseUtilisationException e) {
                 tui.afficheErreur(e);
             }
         }

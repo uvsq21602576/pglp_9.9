@@ -34,7 +34,8 @@ public class CommandeCreationRectangle implements CommandeUndoable {
      * @param p1 Point haut-gauche
      * @param p2 Point bas-droit
      */
-    public CommandeCreationRectangle(final Etat e, final String v, final Point p1, final Point p2) {
+    public CommandeCreationRectangle(final Etat e, final String v,
+            final Point p1, final Point p2) {
         this.etat = e;
         this.variable = v;
         this.hg = p1;
@@ -46,7 +47,8 @@ public class CommandeCreationRectangle implements CommandeUndoable {
      * Execute la commande.
      * Crée un rectangle avec les arguments ennoncé
      * et l'insert dans le dessin courant.
-     * @throws CommandeImpossibleException Si le dessin courant a déjà une forme du même nom.
+     * @throws CommandeImpossibleException Si le dessin courant a déjà une forme
+     *         du même nom.
      */
     @Override
     public void execute() throws CommandeImpossibleException {

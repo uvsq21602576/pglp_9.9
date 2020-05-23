@@ -13,7 +13,7 @@ import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleEx
  * Commande pour charger un dessin de la base de données.
  * @author Flora
  */
-public class CommandeCharger implements Commande {
+public class CommandeCharger implements CommandeUndoable {
 
     /** Etat actuel du logiciel. */
     private Etat etat;
@@ -54,5 +54,10 @@ public class CommandeCharger implements Commande {
         } catch (DejaExistantException e) {
             throw new CommandeImpossibleException(e.getMessage());
         }
+        this.etat.ajouteDansHistorique(this);
+    }
+
+    public void undo() {
+        this.etat.getGlobal().retire(nomDessin);
     }
 }

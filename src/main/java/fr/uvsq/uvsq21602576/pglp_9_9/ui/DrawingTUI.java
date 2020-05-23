@@ -22,7 +22,8 @@ public class DrawingTUI extends DrawingUI {
     /** Scanner. Pour le TUI. */
     private Scanner scanner;
 
-    private static final String SP_POINT = "\\(\\s*-?\\d+\\s*,\\s*-?\\d+\\s*\\)";
+    private static final String SP_POINT =
+            "\\(\\s*-?\\d+\\s*,\\s*-?\\d+\\s*\\)";
     private static final String SP_INT = "-?\\d+";
     private static final String SP_NOM = "[a-zA-Z][a-zA-Z0-9_]*";
     private static final Pattern P_INT = Pattern.compile(SP_INT);
@@ -56,11 +57,15 @@ public class DrawingTUI extends DrawingUI {
      * @throws NoCommandException Si la ligne ne correspond à aucune commande
      * @throws MauvaiseUtilisationException Si la ligne correspond à une
      *         commande, mais que celle-ci est mal utilisée
+     * @throws LigneVideException Si la ligne saisie est vide
      */
-    public Commande nextCommand()
-            throws NoCommandException, MauvaiseUtilisationException {
+    public Commande nextCommand() throws NoCommandException,
+            MauvaiseUtilisationException, LigneVideException {
+        System.out.print("> ");
         String line = this.scanner.nextLine();
-        System.out.println(line);
+        if (line.trim().isEmpty()) {
+            throw new LigneVideException();
+        }
         Matcher m = P_COMMANDE.matcher(line);
         if (m.find()) {
             String fonction = m.group(INDICE_FONCTION);
@@ -101,7 +106,6 @@ public class DrawingTUI extends DrawingUI {
                 result.add(Integer.parseInt(elt));
             }
         }
-        System.out.println(result);
         return result.toArray();
     }
 
@@ -119,7 +123,7 @@ public class DrawingTUI extends DrawingUI {
         }
         return rep.toLowerCase().equals("o");
     }
-    
+
     /**
      * Arrete le logiciel.
      */
@@ -143,12 +147,12 @@ public class DrawingTUI extends DrawingUI {
     public void afficheDessin() {
         System.out
                 .println(super.getEtat().getTotaliteDessinCourant().toString());
-        System.out.print("Dessin courrant : ");
+        System.out.print("Dessin courant : ");
         String s = "";
         for (Dessin d : super.getEtat().getParenteDessin()) {
-            s = s.concat("-> " + d.getNom());
+            s = s.concat(" -> " + d.getNom());
         }
-        s = s.concat("-> " + super.getEtat().getDessinCourant().getNom());
+        s = s.concat(" -> " + super.getEtat().getDessinCourant().getNom());
         System.out.println(s);
     }
 

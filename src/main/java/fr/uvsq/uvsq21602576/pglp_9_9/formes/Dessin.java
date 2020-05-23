@@ -282,10 +282,10 @@ public class Dessin implements ComposantDessin {
         for (int i = 0; i < profondeur; i++) {
             s = s.concat("    ");
         }
-        s = s.concat("|- " + this.nom + " :\n");
+        s = s.concat("|- " + this.nom + " :");
         for (ComposantDessin c : composantsFils.values()) {
-            s = s.concat(c.toString(profondeur + 1));
             s = s.concat("\n");
+            s = s.concat(c.toString(profondeur + 1));
         }
         return s;
     }

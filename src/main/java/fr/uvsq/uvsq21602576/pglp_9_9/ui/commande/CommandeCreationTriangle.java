@@ -37,7 +37,8 @@ public class CommandeCreationTriangle implements CommandeUndoable {
      * @param pp Deuxième point
      * @param ppp Troisième point
      */
-    public CommandeCreationTriangle(final Etat e, final String v, final Point p, final Point pp, final Point ppp) {
+    public CommandeCreationTriangle(final Etat e, final String v, final Point p,
+            final Point pp, final Point ppp) {
         this.etat = e;
         this.variable = v;
         this.p1 = p;
@@ -50,7 +51,8 @@ public class CommandeCreationTriangle implements CommandeUndoable {
      * Execute la commande.
      * Crée un triangle avec les arguments ennoncé
      * et l'insert dans le dessin courant.
-     * @throws CommandeImpossibleException Si le dessin courant a déjà une forme du même nom.
+     * @throws CommandeImpossibleException Si le dessin courant a déjà une forme
+     *         du même nom.
      */
     @Override
     public void execute() throws CommandeImpossibleException {

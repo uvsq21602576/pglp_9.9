@@ -18,7 +18,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -39,7 +39,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -60,7 +60,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable == null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Besoin d'une variable.");
@@ -71,7 +71,8 @@ public enum CommandesTUI {
             }
             if (arguments.length != super.nbArguments) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
-                        "Nombre d'arguments doit être " + super.nbArguments + ".");
+                        "Nombre d'arguments doit être " + super.nbArguments
+                                + ".");
             }
             int iArg = 0;
             if (!(arguments[iArg] instanceof Point)) {
@@ -93,7 +94,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable == null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Besoin d'une variable.");
@@ -104,7 +105,8 @@ public enum CommandesTUI {
             }
             if (arguments.length != super.nbArguments) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
-                        "Nombre d'arguments doit être " + super.nbArguments + ".");
+                        "Nombre d'arguments doit être " + super.nbArguments
+                                + ".");
             }
             int iArg = 0;
             if (!(arguments[iArg] instanceof Point)) {
@@ -126,7 +128,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable == null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Besoin d'une variable.");
@@ -137,7 +139,8 @@ public enum CommandesTUI {
             }
             if (arguments.length != super.nbArguments) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
-                        "Nombre d'arguments doit être " + super.nbArguments + ".");
+                        "Nombre d'arguments doit être " + super.nbArguments
+                                + ".");
             }
             int iArg = 0;
             if (!(arguments[iArg] instanceof Point)) {
@@ -159,7 +162,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable == null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Besoin d'une variable.");
@@ -170,7 +173,8 @@ public enum CommandesTUI {
             }
             if (arguments.length != super.nbArguments) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
-                        "Nombre d'arguments doit être " + super.nbArguments + ".");
+                        "Nombre d'arguments doit être " + super.nbArguments
+                                + ".");
             }
             int iArg = 0;
             if (!(arguments[iArg] instanceof Point)) {
@@ -198,7 +202,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable == null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Besoin d'une variable.");
@@ -219,7 +223,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable == null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Besoin d'une variable.");
@@ -230,7 +234,8 @@ public enum CommandesTUI {
             }
             if (arguments.length != super.nbArguments) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
-                        "Nombre d'arguments doit être " + super.nbArguments + ".");
+                        "Nombre d'arguments doit être " + super.nbArguments
+                                + ".");
             }
             int iArg = 0;
             if (!(arguments[iArg] instanceof String)) {
@@ -246,7 +251,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -257,7 +262,8 @@ public enum CommandesTUI {
             }
             if (arguments.length != super.nbArguments) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
-                        "Nombre d'arguments doit être " + super.nbArguments + ".");
+                        "Nombre d'arguments doit être " + super.nbArguments
+                                + ".");
             }
             int iArg = 0;
             if (!(arguments[iArg] instanceof String)) {
@@ -279,7 +285,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -300,7 +306,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -321,7 +327,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -332,7 +338,8 @@ public enum CommandesTUI {
             }
             if (arguments.length != super.nbArguments) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
-                        "Nombre d'arguments doit être " + super.nbArguments + ".");
+                        "Nombre d'arguments doit être " + super.nbArguments
+                                + ".");
             }
             int iArg = 0;
             if (!(arguments[iArg] instanceof String)) {
@@ -354,7 +361,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -365,7 +372,8 @@ public enum CommandesTUI {
             }
             if (arguments.length != super.nbArguments) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
-                        "Nombre d'arguments doit être " + super.nbArguments + ".");
+                        "Nombre d'arguments doit être " + super.nbArguments
+                                + ".");
             }
             int iArg = 0;
             if (!(arguments[iArg] instanceof String)) {
@@ -387,7 +395,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -398,7 +406,8 @@ public enum CommandesTUI {
             }
             if (arguments.length != super.nbArguments) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
-                        "Nombre d'arguments doit être " + super.nbArguments + ".");
+                        "Nombre d'arguments doit être " + super.nbArguments
+                                + ".");
             }
             int iArg = 0;
             if (!(arguments[iArg] instanceof String)) {
@@ -414,7 +423,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -425,7 +434,8 @@ public enum CommandesTUI {
             }
             if (arguments.length != super.nbArguments) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
-                        "Nombre d'arguments doit être " + super.nbArguments + ".");
+                        "Nombre d'arguments doit être " + super.nbArguments
+                                + ".");
             }
             int iArg = 0;
             if (!(arguments[iArg] instanceof String)) {
@@ -441,7 +451,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -462,7 +472,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -483,7 +493,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -494,7 +504,8 @@ public enum CommandesTUI {
             }
             if (arguments.length != super.nbArguments) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
-                        "Nombre d'arguments doit être " + super.nbArguments + ".");
+                        "Nombre d'arguments doit être " + super.nbArguments
+                                + ".");
             }
             int iArg = 0;
             if (!(arguments[iArg] instanceof String)) {
@@ -510,7 +521,7 @@ public enum CommandesTUI {
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
                 final Etat etat, final DrawingUI ui)
-                        throws MauvaiseUtilisationException {
+                throws MauvaiseUtilisationException {
             if (variable != null) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
                         "Variable non admise.");
@@ -521,7 +532,8 @@ public enum CommandesTUI {
             }
             if (arguments.length != super.nbArguments) {
                 throw new MauvaiseUtilisationException(super.nomFonction,
-                        "Nombre d'arguments doit être " + super.nbArguments + ".");
+                        "Nombre d'arguments doit être " + super.nbArguments
+                                + ".");
             }
             int iArg = 0;
             if (!(arguments[iArg] instanceof String)) {
@@ -533,7 +545,6 @@ public enum CommandesTUI {
         }
     };
 
-
     /** Nom de la fontion correspondant à la commande. */
     private final String nomFonction;
     /** Nombre d'arguments nécéssaires à la commande. */
@@ -541,7 +552,8 @@ public enum CommandesTUI {
 
     /**
      * COnstructeur.
-     * Crée une CommandesTUI avec le nom de sa fonction correspondante et le nombre d'arguments necessaires.
+     * Crée une CommandesTUI avec le nom de sa fonction correspondante et le
+     * nombre d'arguments necessaires.
      * @param nom Nom de la fontion.
      * @param Nombre d'argument nécessaire pour la commande
      */
@@ -579,8 +591,7 @@ public enum CommandesTUI {
      * @return Commande associée
      * @throws MauvaiseUtilisationException Si la commande est mal utilisée
      */
-    public abstract Commande getCommande(String variable,
-            boolean parentheses, Object[] arguments,
-            Etat etat, DrawingUI ui)
-                    throws MauvaiseUtilisationException;
+    public abstract Commande getCommande(String variable, boolean parentheses,
+            Object[] arguments, Etat etat, DrawingUI ui)
+            throws MauvaiseUtilisationException;
 }

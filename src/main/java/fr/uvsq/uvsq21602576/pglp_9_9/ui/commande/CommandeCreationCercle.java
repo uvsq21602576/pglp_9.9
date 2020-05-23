@@ -51,7 +51,8 @@ public class CommandeCreationCercle implements CommandeUndoable {
     @Override
     public void execute() throws CommandeImpossibleException {
         if (rayon < 0) {
-            throw new CommandeImpossibleException("Le rayon d'un cercle est positif.");
+            throw new CommandeImpossibleException(
+                    "Le rayon d'un cercle est positif.");
         }
         this.cercle = new Cercle(variable, centre, rayon);
         try {

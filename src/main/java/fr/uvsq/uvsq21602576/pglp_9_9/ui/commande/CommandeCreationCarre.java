@@ -32,7 +32,8 @@ public class CommandeCreationCarre implements CommandeUndoable {
      * @param p Point haut-gauche
      * @param l Longueur d'un coté
      */
-    public CommandeCreationCarre(final Etat e, final String v, final Point p, final int l) {
+    public CommandeCreationCarre(final Etat e, final String v, final Point p,
+            final int l) {
         this.etat = e;
         this.variable = v;
         this.hg = p;
@@ -44,12 +45,14 @@ public class CommandeCreationCarre implements CommandeUndoable {
      * Execute la commande.
      * Crée un carre avec les arguments ennoncés
      * et l'insert dans le dessin courant.
-     * @throws CommandeImpossibleException Si le dessin courant a déjà une forme du même nom.
+     * @throws CommandeImpossibleException Si le dessin courant a déjà une forme
+     *         du même nom.
      */
     @Override
     public void execute() throws CommandeImpossibleException {
         if (longueur < 0) {
-            throw new CommandeImpossibleException("La longueur de coté d'un carré est positive.");
+            throw new CommandeImpossibleException(
+                    "La longueur de coté d'un carré est positive.");
         }
         this.carre = new Carre(variable, hg, longueur);
         try {
