@@ -1,7 +1,7 @@
 # Logiciel de Dessin
 Ce logiciel de dessin permet de créer des formes, de les regrouper dans un dessin et dans des sous-dessins, ainsi que de sauvegarder et charger des dessins entiers.
 
-Chaque commande admet les caractères blans entre les différents mots et parenthèses. Les mots clés de fonction doivent eux respecter la casse, et sont toujours suivies de parenthèses, avec ou sans arguments. Cela permet de les distinguer d'un nom de variable. Un nom de variable commence par une lettre et peut contenir lettres, chiffres et tirets bas. Les nombres sont des entiers, positifs et négatifs.
+Chaque commande admet les caractères blancs entre les différents mots et parenthèses. Les mots clés de fonction doivent eux respecter la casse, et sont toujours suivies de parenthèses, avec ou sans arguments. Cela permet de les distinguer d'un nom de variable. Un nom de variable commence par une lettre et peut contenir lettres, chiffres et tirets bas. Les nombres sont des entiers, positifs et négatifs.
 
 ## Formes
 Plusieurs types de formes peuvent être créées : Cercle, Triangle, Rectangle et Carré.
@@ -27,7 +27,7 @@ Le dessin Global est le dessin contenant tous les autres. Il ne peut ni être sa
 Chaque forme peut être déplacée, et un ensemble de forme, un dessin, peut l'être aussi.
 La commande pour cela est la même : `deplacer(f,(1,1))` permet de déplacer une forme ou un dessin f par un vecteur de déplacement (1,1).
 
-Toutes varaibles peuvent être supprimées, ou copiées.
+Toutes variables peuvent être supprimées, ou copiées.
 `c = copier(a)` permet de copier à l'identique une variable a, et de l'insérer dans le dessin courant sous le nom c.
 `supprime(a)` permet de supprimer une variable nommée a.
 
