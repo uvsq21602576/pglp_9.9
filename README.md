@@ -16,7 +16,7 @@ Les formes peuvent être réunies en dessin. Une forme est toujours crée dans l
 Pour créer un dessin nommé D, on utlise `D = Dessin()`.                                           
 On peut déplacer les dessins entre le dessin courant et un sous-dessin de celui-ci.
 Pour déplacer une forme ou un dessin f du dessin courant au sous-dessin ssD, on a la commande `ajoute(f,ssD)`.
-Pour déplacer une forme ou dessin f d'un sous-dessu=in ssD au dessin courant, on a la commande `retire(f,ssD)`.
+Pour déplacer une forme ou dessin f d'un sous-dessin ssD au dessin courant, on a la commande `retire(f,ssD)`.
 
 La commande `voir(ssD)` permet de changer le dessin courant pour le sous-dessin ssD de ce dernier.
 La commande `sortir()` permet de changer le dessin courant pour le dessin parent de ce dernier.
@@ -25,10 +25,10 @@ Le dessin Global est le dessin contenant tous les autres. Il ne peut ni être sa
 
 ## Traitement
 Chaque forme peut être déplacée, et un ensemble de forme, un dessin, peut l'être aussi.
-La commande pour cela est la même : `deplacer(f,(1,1))` permet de déplacer une forme ou un dessin f par un vecteur de déplacement (1,1).
+La commande pour cela est la même : `deplace(f,(1,1))` permet de déplacer une forme ou un dessin f par un vecteur de déplacement (1,1).
 
 Toutes variables peuvent être supprimées, ou copiées.
-`c = copier(a)` permet de copier à l'identique une variable a, et de l'insérer dans le dessin courant sous le nom c.
+`c = copie(a)` permet de copier à l'identique une variable a, et de l'insérer dans le dessin courant sous le nom c.
 `supprime(a)` permet de supprimer une variable nommée a.
 
 ## Affichage
