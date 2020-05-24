@@ -87,7 +87,7 @@ public class CommandeAjouteDessinTest {
         Commande com = new CommandeAjouteDessin(etat, "c", "D");
         com.execute();
     }
-    
+
     /**
      * Teste l'execution, avec dessin non dessin.
      * @throws CommandeImpossibleException En cas de problème lors de

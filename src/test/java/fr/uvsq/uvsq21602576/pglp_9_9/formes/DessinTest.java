@@ -2,6 +2,7 @@ package fr.uvsq.uvsq21602576.pglp_9_9.formes;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -37,6 +38,23 @@ public class DessinTest {
     public void copieTest()
             throws DejaExistantException, DessinGlobalException {
         Dessin d = new Dessin("d1");
+        Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
+        d.ajoute(c1);
+
+        Dessin copie = (Dessin) d.copie();
+        assertFalse(d == copie);
+        assertEquals(d, copie);
+    }
+
+    /**
+     * Teste la copie de global.
+     * @throws DejaExistantException si un nom déjà existant est ajouté
+     * @throws DessinGlobalException Si un dessin a le même nom que le global
+     */
+    @Test
+    public void copieGlobalTest()
+            throws DejaExistantException, DessinGlobalException {
+        Dessin d = new Dessin();
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
         d.ajoute(c1);
 
@@ -122,7 +140,7 @@ public class DessinTest {
         d.ajouteTout(actual);
         assertTrue(d.getComposantsFils().isEmpty());
     }
-    
+
     /**
      * Teste l'ajouteTout.
      * En cas de deux noms identiques entre déjà dans le dessin et dehors.
@@ -144,7 +162,7 @@ public class DessinTest {
         d.ajouteTout(actual);
         ArrayList<ComposantDessin> expected = new ArrayList<>();
         expected.add(r);
-        assertEquals(expected,  d.getComposantsFils());
+        assertEquals(expected, d.getComposantsFils());
     }
 
     /**
@@ -167,7 +185,7 @@ public class DessinTest {
         assertEquals(expected,
                 new ArrayList<ComposantDessin>(d.getComposantsFils()));
     }
-    
+
     /**
      * Teste le retirement avec nom de composant.
      * @throws DejaExistantException si deux objet aux noms identiques sont
@@ -188,7 +206,7 @@ public class DessinTest {
         assertEquals(expected,
                 new ArrayList<ComposantDessin>(d.getComposantsFils()));
     }
-    
+
     /**
      * Teste le getComposant.
      * @throws DejaExistantException si deux objet aux noms identiques sont
@@ -197,8 +215,8 @@ public class DessinTest {
      * @throws NoFilsException Si aucun composant n'est trouvé
      */
     @Test
-    public void getComposantTest()
-            throws DejaExistantException, DessinGlobalException, NoFilsException {
+    public void getComposantTest() throws DejaExistantException,
+            DessinGlobalException, NoFilsException {
         Dessin d = new Dessin("d1");
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
         d.ajoute(c1);
@@ -207,7 +225,7 @@ public class DessinTest {
         ComposantDessin actual = d.getComposant("c1");
         assertEquals(c1, actual);
     }
-    
+
     /**
      * Teste le getComposant, sans le composant.
      * @throws DejaExistantException si deux objet aux noms identiques sont
@@ -216,8 +234,8 @@ public class DessinTest {
      * @throws NoFilsException Si aucun composant n'est trouvé
      */
     @Test(expected = NoFilsException.class)
-    public void getComposantExceptionTest()
-            throws DejaExistantException, DessinGlobalException, NoFilsException {
+    public void getComposantExceptionTest() throws DejaExistantException,
+            DessinGlobalException, NoFilsException {
         Dessin d = new Dessin("d1");
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
         d.ajoute(c1);
@@ -250,7 +268,7 @@ public class DessinTest {
 
         assertEquals(expected, d);
     }
-    
+
     /**
      * Teste la duplication.
      * Sans problème.
@@ -260,12 +278,13 @@ public class DessinTest {
      * @throws NoFilsException Si aucun fils ne correspond au composant demandé
      */
     @Test
-    public void copierTest() throws DessinGlobalException, DejaExistantException, NoFilsException {
+    public void copierTest() throws DessinGlobalException,
+            DejaExistantException, NoFilsException {
         Dessin d = new Dessin("d1");
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
         d.ajoute(c1);
         d.copier("c1", "c1bis");
-        
+
         Dessin expected = new Dessin("d1");
         Cercle c1M = new Cercle("c1", new Point(2, 3), 10);
         expected.ajoute(c1M);
@@ -274,7 +293,7 @@ public class DessinTest {
 
         assertEquals(expected, d);
     }
-    
+
     /**
      * Teste la duplication.
      * Snas fils à copier.
@@ -284,11 +303,12 @@ public class DessinTest {
      * @throws NoFilsException Si aucun fils ne correspond au composant demandé
      */
     @Test(expected = NoFilsException.class)
-    public void copierNoFilsTest() throws DessinGlobalException, DejaExistantException, NoFilsException {
+    public void copierNoFilsTest() throws DessinGlobalException,
+            DejaExistantException, NoFilsException {
         Dessin d = new Dessin("d1");
         d.copier("c1", "c1bis");
     }
-    
+
     /**
      * Teste la duplication.
      * Avec un composant de meme nom déjà présent.
@@ -298,7 +318,8 @@ public class DessinTest {
      * @throws NoFilsException Si aucun fils ne correspond au composant demandé
      */
     @Test(expected = DejaExistantException.class)
-    public void copierMemeNomTest() throws DessinGlobalException, DejaExistantException, NoFilsException {
+    public void copierMemeNomTest() throws DessinGlobalException,
+            DejaExistantException, NoFilsException {
         Dessin d = new Dessin("d1");
         Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
         Cercle c1bis = new Cercle("c1bis", new Point(2, 3), 10);
@@ -307,4 +328,57 @@ public class DessinTest {
         d.copier("c1", "c1bis");
     }
 
+    /**
+     * Teste l'égalité correcte.
+     * @throws DejaExistantException si deux objet aux noms identiques sont
+     *         ajouté dans dessin
+     * @throws DessinGlobalException Si un dessin a le même nom que le global
+     */
+    @Test
+    public void equalsTest()
+            throws DessinGlobalException, DejaExistantException {
+        Dessin d = new Dessin("d1");
+        Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
+        Dessin d2 = new Dessin("d1");
+        Cercle c1bis = new Cercle("c1", new Point(2, 3), 10);
+        d.ajoute(c1);
+        d2.ajoute(c1bis);
+        assertEquals(d, d2);
+    }
+
+    /**
+     * Teste l'égalité incorrecte par les composants.
+     * @throws DejaExistantException si deux objet aux noms identiques sont
+     *         ajouté dans dessin
+     * @throws DessinGlobalException Si un dessin a le même nom que le global
+     */
+    @Test
+    public void equalsComposantNotTest()
+            throws DessinGlobalException, DejaExistantException {
+        Dessin d = new Dessin("d1");
+        Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
+        Dessin d2 = new Dessin("d1");
+        Cercle c1bis = new Cercle("c1bis", new Point(2, 3), 10);
+        d.ajoute(c1);
+        d2.ajoute(c1bis);
+        assertNotEquals(d, d2);
+    }
+
+    /**
+     * Teste l'égalité incorrecte par le nom.
+     * @throws DejaExistantException si deux objet aux noms identiques sont
+     *         ajouté dans dessin
+     * @throws DessinGlobalException Si un dessin a le même nom que le global
+     */
+    @Test
+    public void equalsNomNotTest()
+            throws DessinGlobalException, DejaExistantException {
+        Dessin d = new Dessin("d1");
+        Cercle c1 = new Cercle("c1", new Point(2, 3), 10);
+        Dessin d2 = new Dessin("d2");
+        Cercle c1bis = new Cercle("c1", new Point(2, 3), 10);
+        d.ajoute(c1);
+        d2.ajoute(c1bis);
+        assertNotEquals(d, d2);
+    }
 }

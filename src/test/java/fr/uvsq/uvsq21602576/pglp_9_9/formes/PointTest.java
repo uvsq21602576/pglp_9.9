@@ -2,6 +2,7 @@ package fr.uvsq.uvsq21602576.pglp_9_9.formes;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
@@ -31,5 +32,35 @@ public class PointTest {
         Point actual = p.copie();
         assertFalse(p == actual);
         assertEquals(p, actual);
+    }
+
+    /**
+     * Teste l'égalité correcte.
+     */
+    @Test
+    public void equalsTest() {
+        Point p = new Point(1, 3);
+        Point q = new Point(1, 3);
+        assertEquals(p, q);
+    }
+
+    /**
+     * Teste l'égalité incorrecte par X.
+     */
+    @Test
+    public void equalsXNotTest() {
+        Point p = new Point(2, 3);
+        Point q = new Point(1, 3);
+        assertNotEquals(p, q);
+    }
+
+    /**
+     * Teste l'égalité incorrecte par Y.
+     */
+    @Test
+    public void equalsYNotTest() {
+        Point p = new Point(1, 4);
+        Point q = new Point(1, 3);
+        assertNotEquals(p, q);
     }
 }

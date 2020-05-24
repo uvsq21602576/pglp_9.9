@@ -76,7 +76,7 @@ public enum CommandesTUI {
         }
     },
     /** Commande pour créer un carré. */
-    CREATION_CARRE("carre", 2) {
+    CREATION_CARRE("Carre", 2) {
         @Override
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
@@ -111,7 +111,7 @@ public enum CommandesTUI {
         }
     },
     /** Commande pour créer un cercle. */
-    CREATION_CERCLE("cercle", 2) {
+    CREATION_CERCLE("Cercle", 2) {
         @Override
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
@@ -146,7 +146,7 @@ public enum CommandesTUI {
         }
     },
     /** Commande pour créer un rectangle. */
-    CREATION_RECTANGLE("rectangle", 2) {
+    CREATION_RECTANGLE("Rectangle", 2) {
         @Override
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
@@ -181,7 +181,7 @@ public enum CommandesTUI {
         }
     },
     /** Commande pour créer un triangle. */
-    CREATION_TRIANGLE("triangle", 3) {
+    CREATION_TRIANGLE("Triangle", 3) {
         @Override
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,
@@ -222,7 +222,7 @@ public enum CommandesTUI {
         }
     },
     /** Commande pour créer un dessin. */
-    CREATION_DESSIN("dessin", 0) {
+    CREATION_DESSIN("Dessin", 0) {
         @Override
         public Commande getCommande(final String variable,
                 final boolean parentheses, final Object[] arguments,

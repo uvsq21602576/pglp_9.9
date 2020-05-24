@@ -105,6 +105,7 @@ public class TriangleDAOJDBC extends DAO<Triangle> {
                             + "primary key (nom, dessinID), "
                             + "foreign key (dessinID) "
                             + "references dessin(dessinID))");
+                    stmt.close();
                 }
             }
         } catch (MetaDataException | SQLException e) {

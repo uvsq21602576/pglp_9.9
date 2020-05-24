@@ -11,7 +11,7 @@ import fr.uvsq.uvsq21602576.pglp_9_9.formes.Point;
  * @author Flora
  */
 public class DrawingTUITest {
-    
+
     /**
      * Teste le parser des arguments entre parenthèse.
      * Pour une chaine nulle.
@@ -22,7 +22,7 @@ public class DrawingTUITest {
         Object[] actual = d.entreParenthesesParser("");
         assertEquals(0, actual.length);
     }
-    
+
     /**
      * Teste le parser des arguments entre parenthèse.
      * Pour une chaine avec deux entiers.
@@ -35,7 +35,7 @@ public class DrawingTUITest {
         assertEquals(-100, actual[0]);
         assertEquals(42, actual[1]);
     }
-    
+
     /**
      * Teste le parser des arguments entre parenthèse.
      * Pour une chaine avec deux points.
@@ -48,7 +48,7 @@ public class DrawingTUITest {
         assertEquals(new Point(0, 9), actual[0]);
         assertEquals(new Point(-19, 45), actual[1]);
     }
-    
+
     /**
      * Teste le parser des arguments entre parenthèse.
      * Pour une chaine avec deux mots.

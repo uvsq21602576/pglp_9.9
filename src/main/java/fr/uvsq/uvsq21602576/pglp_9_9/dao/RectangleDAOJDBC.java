@@ -104,6 +104,7 @@ public class RectangleDAOJDBC extends DAO<Rectangle> {
                             + "primary key (nom, dessinID), "
                             + "foreign key (dessinID) "
                             + "references dessin(dessinID))");
+                    stmt.close();
                 }
             }
         } catch (MetaDataException | SQLException e) {

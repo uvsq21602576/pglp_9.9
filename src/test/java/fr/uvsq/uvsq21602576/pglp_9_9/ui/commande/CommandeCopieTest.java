@@ -19,14 +19,17 @@ import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleExcept
  * @author Flora
  */
 public class CommandeCopieTest {
-    
+
     /**
      * Teste l'execution.
-     * @throws DejaExistantException Si un même objet existait déjà dans le dessin.
-     * @throws CommandeImpossibleException En cas d'erreur lors de l'execution de la commande. 
+     * @throws DejaExistantException Si un même objet existait déjà dans le
+     *         dessin.
+     * @throws CommandeImpossibleException En cas d'erreur lors de l'execution
+     *         de la commande.
      */
     @Test
-    public void executeTest() throws DejaExistantException, CommandeImpossibleException {
+    public void executeTest()
+            throws DejaExistantException, CommandeImpossibleException {
         Etat etat = new Etat();
         Cercle c = new Cercle("c1", new Point(1, 2), 30);
         etat.getDessinCourant().ajoute(c);
@@ -35,17 +38,21 @@ public class CommandeCopieTest {
         ArrayList<ComposantDessin> expected = new ArrayList<>();
         expected.add(new Cercle("c1bis", new Point(1, 2), 30));
         expected.add(c);
-        assertEquals(expected, new ArrayList<>(etat.getDessinCourant().getComposantsFils()));
+        assertEquals(expected,
+                new ArrayList<>(etat.getDessinCourant().getComposantsFils()));
     }
-    
+
     /**
      * Teste l'annulation.
-     * @throws DejaExistantException Si un même objet existait déjà dans le dessin.
-     * @throws CommandeImpossibleException En cas d'erreur lors de l'execution de la commande. 
+     * @throws DejaExistantException Si un même objet existait déjà dans le
+     *         dessin.
+     * @throws CommandeImpossibleException En cas d'erreur lors de l'execution
+     *         de la commande.
      * @throws UndoImpossibleException En cas d'erreur lors de l'annulation.
      */
     @Test
-    public void undoTest() throws DejaExistantException, CommandeImpossibleException, UndoImpossibleException {
+    public void undoTest() throws DejaExistantException,
+            CommandeImpossibleException, UndoImpossibleException {
         Etat etat = new Etat();
         Cercle c = new Cercle("c1", new Point(1, 2), 30);
         etat.getDessinCourant().ajoute(c);
@@ -54,7 +61,8 @@ public class CommandeCopieTest {
         com.undo();
         ArrayList<ComposantDessin> expected = new ArrayList<>();
         expected.add(c);
-        assertEquals(expected, new ArrayList<>(etat.getDessinCourant().getComposantsFils()));
+        assertEquals(expected,
+                new ArrayList<>(etat.getDessinCourant().getComposantsFils()));
     }
-    
+
 }

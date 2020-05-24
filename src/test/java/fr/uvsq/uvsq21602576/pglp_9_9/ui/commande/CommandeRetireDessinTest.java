@@ -94,14 +94,15 @@ public class CommandeRetireDessinTest {
      */
     @Test(expected = CommandeImpossibleException.class)
     public void executeAvecDessinNonDessinTest()
-            throws CommandeImpossibleException, UndoImpossibleException, DejaExistantException {
+            throws CommandeImpossibleException, UndoImpossibleException,
+            DejaExistantException {
         Etat etat = new Etat();
         Cercle c = new Cercle("c", new Point(1, 1), 10);
         etat.getDessinCourant().ajoute(c);
         Commande com = new CommandeRetireDessin(etat, "c", "c");
         com.execute();
     }
-    
+
     /**
      * Teste l'execution, avec un composant ayant le même nom dans dessin.
      * @throws CommandeImpossibleException En cas de problème lors de

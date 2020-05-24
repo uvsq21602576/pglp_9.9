@@ -36,7 +36,15 @@ public class DrawingTUI extends DrawingUI {
             Pattern.compile("(" + SP_POINT + "|" + SP_INT + "|" + SP_NOM + ")");
     /** Pattern pour une ligne de commande. */
     private static final Pattern P_COMMANDE = Pattern.compile(
-            "^\\s*(([a-zA-Z][a-zA-Z0-9_]*)\\s*=\\s*)?([a-zA-Z][a-zA-Z0-9_]*)\\s*(\\(\\s*((([a-zA-Z][a-zA-Z0-9_]*|-?\\d*|\\(\\s*-?\\d+\\s*,\\s*-?\\d+\\s*\\))\\s*,\\s*)*\\s*([a-zA-Z][a-zA-Z0-9_]*|-?\\d+|\\(\\s*-?\\d+\\s*,\\s*-?\\d+\\s*\\)))?\\s*\\)\\s*)?$"); // )
+            "^\\s*(([a-zA-Z][a-zA-Z0-9_]*)\\s*=\\s*)?"
+            + "([a-zA-Z][a-zA-Z0-9_]*)\\s*"
+            + "(\\(\\s*((([a-zA-Z][a-zA-Z0-9_]*"
+            + "|-?\\d*"
+            + "|\\(\\s*-?\\d+\\s*,\\s*-?\\d+\\s*\\))\\s*,\\s*)*"
+            + "\\s*([a-zA-Z][a-zA-Z0-9_]*"
+            + "|-?\\d+"
+            + "|\\(\\s*-?\\d+\\s*,\\s*-?\\d+\\s*\\)))?"
+            + "\\s*\\)\\s*)?$"); // )
 
     /** Dans le pattern commande, indice pour trouver le nom de la fonction. */
     private static final int INDICE_FONCTION = 3;
@@ -94,6 +102,12 @@ public class DrawingTUI extends DrawingUI {
         }
     }
 
+    /**
+     * Parse les object int, Point et Nom marqué dans entreParenthèse.
+     * Et renvoie un tableau de ces objets.
+     * @param entreParentheses  Chaine de caractère à parser
+     * @return  Tabeau d'objet présent dans la chaine de caractères.
+     */
     Object[] entreParenthesesParser(final String entreParentheses) {
         ArrayList<Object> result = new ArrayList<>();
         if (entreParentheses == null) {

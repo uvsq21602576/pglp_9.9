@@ -17,7 +17,7 @@ import fr.uvsq.uvsq21602576.pglp_9_9.formes.Dessin;
  * @author Flora
  */
 public class EtatTest {
-    
+
     /**
      * Teste la méthode getTotaliteDessinCourant.
      * @throws DeplacementImpossibleException Si le déplacement dans le sous
@@ -28,8 +28,9 @@ public class EtatTest {
      *         dessin global
      */
     @Test
-    public void getTotaliteDessinCourantTest() throws DeplacementImpossibleException,
-            DejaExistantException, DessinGlobalException {
+    public void getTotaliteDessinCourantTest()
+            throws DeplacementImpossibleException, DejaExistantException,
+            DessinGlobalException {
         Etat etat = new Etat();
         Dessin d = new Dessin("d");
         etat.getDessinCourant().ajoute(d);
@@ -40,7 +41,7 @@ public class EtatTest {
         Dessin actual = etat.getTotaliteDessinCourant();
         assertTrue(d == actual);
     }
-    
+
     /**
      * Teste la méthode getTotaliteDessinCourant, avec global.
      * @throws DeplacementImpossibleException Si le déplacement dans le sous
@@ -51,8 +52,9 @@ public class EtatTest {
      *         dessin global
      */
     @Test
-    public void getTotaliteDessinCourantGlobalTest() throws DeplacementImpossibleException,
-            DejaExistantException, DessinGlobalException {
+    public void getTotaliteDessinCourantGlobalTest()
+            throws DeplacementImpossibleException, DejaExistantException,
+            DessinGlobalException {
         Etat etat = new Etat();
         Dessin actual = etat.getTotaliteDessinCourant();
         assertEquals(Dessin.GLOBAL, actual.getNom());

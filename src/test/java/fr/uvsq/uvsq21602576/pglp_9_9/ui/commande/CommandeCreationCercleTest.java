@@ -26,8 +26,7 @@ public class CommandeCreationCercleTest {
      *         l'execution de la commande
      */
     @Test
-    public void executeTest()
-            throws CommandeImpossibleException {
+    public void executeTest() throws CommandeImpossibleException {
         Etat etat = new Etat();
         Commande c = new CommandeCreationCercle(etat, "C", new Point(1, 2), 10);
         c.execute();
@@ -36,17 +35,17 @@ public class CommandeCreationCercleTest {
         assertEquals(expected,
                 new ArrayList<>(etat.getDessinCourant().getComposantsFils()));
     }
-    
+
     /**
      * Teste l'execution, avec rayon negatif.
      * @throws CommandeImpossibleException En cas de problème lors de
      *         l'execution de la commande
      */
     @Test(expected = CommandeImpossibleException.class)
-    public void executeNagtifTest()
-            throws CommandeImpossibleException {
+    public void executeNagtifTest() throws CommandeImpossibleException {
         Etat etat = new Etat();
-        Commande c = new CommandeCreationCercle(etat, "C", new Point(1, 2), -10);
+        Commande c =
+                new CommandeCreationCercle(etat, "C", new Point(1, 2), -10);
         c.execute();
     }
 

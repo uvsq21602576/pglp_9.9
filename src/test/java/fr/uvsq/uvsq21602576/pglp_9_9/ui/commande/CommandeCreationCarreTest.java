@@ -26,8 +26,7 @@ public class CommandeCreationCarreTest {
      *         l'execution de la commande
      */
     @Test
-    public void executeTest()
-            throws CommandeImpossibleException {
+    public void executeTest() throws CommandeImpossibleException {
         Etat etat = new Etat();
         Commande c = new CommandeCreationCarre(etat, "C", new Point(1, 2), 10);
         c.execute();
@@ -36,15 +35,14 @@ public class CommandeCreationCarreTest {
         assertEquals(expected,
                 new ArrayList<>(etat.getDessinCourant().getComposantsFils()));
     }
-    
+
     /**
      * Teste l'execution, avec longueur négative.
      * @throws CommandeImpossibleException En cas de problème lors de
      *         l'execution de la commande
      */
     @Test(expected = CommandeImpossibleException.class)
-    public void executeNegatifTest()
-            throws CommandeImpossibleException {
+    public void executeNegatifTest() throws CommandeImpossibleException {
         Etat etat = new Etat();
         Commande c = new CommandeCreationCarre(etat, "C", new Point(1, 2), -10);
         c.execute();

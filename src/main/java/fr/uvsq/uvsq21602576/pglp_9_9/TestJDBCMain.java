@@ -287,8 +287,9 @@ public enum TestJDBCMain {
 
     /**
      * Teste pour Dessin.
+     * @throws DessinGlobalException En cas de ssin du nom de global.
      */
-    public void testJDBCDessin() {
+    public void testJDBCDessin() throws DessinGlobalException {
         DAO<Dessin> daoD = FabriqueDAO.getFabriqueDAO(FabriqueDAO.TypeDAO.JDBC)
                 .getDessinDAO();
 
@@ -303,12 +304,7 @@ public enum TestJDBCMain {
                 new Point(45, 8));
         Triangle t2 = new Triangle("t2", new Point(50987, 48),
                 new Point(45987, 8), new Point(45, 8));
-        Dessin d = null;
-        try {
-            d = new Dessin("sousD");
-        } catch (DessinGlobalException e2) {
-            System.err.println(e2.getMessage());
-        }
+        Dessin d = new Dessin("sousD");
         try {
             d.ajoute(c2);
         } catch (DejaExistantException e1) {
@@ -334,14 +330,13 @@ public enum TestJDBCMain {
         } catch (DejaExistantException e1) {
             System.err.println(e1.getMessage());
         }
-        Dessin actual = null;
+        Dessin actual = new Dessin("actual");
         try {
-            actual = new Dessin("actual");
             actual.ajoute(ce2);
             actual.ajoute(c);
             actual.ajoute(d);
             System.out.println(actual.toString());
-        } catch (DessinGlobalException | DejaExistantException e2) {
+        } catch (DejaExistantException e2) {
             System.err.println(e2.getMessage());
         }
         try {
@@ -366,19 +361,15 @@ public enum TestJDBCMain {
         Carre cM = new Carre("cM", new Point(5, 48), 22);
         try {
             actual.ajoute(cM);
-        } catch (DejaExistantException e1) {
-            System.err.println(e1.getMessage());
-        }
-        actual.retire(c);
-        actual.retire(ce2);
-        try {
+            actual.retire(c);
+            actual.retire(ce2);
             actual.ajoute(t);
+            System.out.println("Modifié : " + actual.toString());
         } catch (DejaExistantException e1) {
             System.err.println(e1.getMessage());
         }
         d.retire(r2);
         d.deplace(new Point(-1, -1));
-        System.out.println("Modifié : " + actual.toString());
         try {
             daoD.update(actual);
             System.out.println("Modification réussie.");
@@ -398,7 +389,7 @@ public enum TestJDBCMain {
 
         // DELETE
         try {
-            daoD.delete(actual.getNom());
+            daoD.delete("actual");
             System.out.println("Suppression réussie.");
         } catch (DeletionException e) {
             e.printStackTrace();
@@ -422,6 +413,10 @@ public enum TestJDBCMain {
         // testMAIN.testJDBCCarre();
         // testMAIN.testJDBCRectangle();
         // testMAIN.testJDBCTriangle();
-        testMAIN.testJDBCDessin();
+        try {
+            testMAIN.testJDBCDessin();
+        } catch (DessinGlobalException e) {
+            e.printStackTrace();
+        }
     }
 }

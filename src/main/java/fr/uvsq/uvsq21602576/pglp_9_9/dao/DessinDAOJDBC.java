@@ -105,6 +105,7 @@ public class DessinDAOJDBC extends DAO<Dessin> {
                             + "unique (nom, globalID),"
                             + "foreign key (globalID) "
                             + "references dessin(dessinID))");
+                    stmt.close();
                 }
                 try (Statement insertDessin = conn.createStatement()) {
                     insertDessin.execute("INSERT INTO dessin "
