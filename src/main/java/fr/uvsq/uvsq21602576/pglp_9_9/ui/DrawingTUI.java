@@ -22,19 +22,29 @@ public class DrawingTUI extends DrawingUI {
     /** Scanner. Pour le TUI. */
     private Scanner scanner;
 
+    /** String pattern pour un point. */
     private static final String SP_POINT =
             "\\(\\s*-?\\d+\\s*,\\s*-?\\d+\\s*\\)";
+    /** String Pattern pour un entier. */
     private static final String SP_INT = "-?\\d+";
+    /** String Pattern pour un nom de variable ou fonction. */
     private static final String SP_NOM = "[a-zA-Z][a-zA-Z0-9_]*";
+    /** Pattern pour un entier. */
     private static final Pattern P_INT = Pattern.compile(SP_INT);
+    /** Pattern pour un argument : Point, entier ou nom. */
     private static final Pattern P_ARG =
             Pattern.compile("(" + SP_POINT + "|" + SP_INT + "|" + SP_NOM + ")");
+    /** Pattern pour une ligne de commande. */
     private static final Pattern P_COMMANDE = Pattern.compile(
             "^\\s*(([a-zA-Z][a-zA-Z0-9_]*)\\s*=\\s*)?([a-zA-Z][a-zA-Z0-9_]*)\\s*(\\(\\s*((([a-zA-Z][a-zA-Z0-9_]*|-?\\d*|\\(\\s*-?\\d+\\s*,\\s*-?\\d+\\s*\\))\\s*,\\s*)*\\s*([a-zA-Z][a-zA-Z0-9_]*|-?\\d+|\\(\\s*-?\\d+\\s*,\\s*-?\\d+\\s*\\)))?\\s*\\)\\s*)?$"); // )
 
+    /** Dans le pattern commande, indice pour trouver le nom de la fonction. */
     private static final int INDICE_FONCTION = 3;
+    /** Dans le pattern commande, indice pour trouver le nom de la variable. */
     private static final int INDICE_VARIABLE = 2;
+    /** Dans le pattern commande, indice pour trouver la présence de "()". */
     private static final int INDICE_PARENTHESE = 4;
+    /** Dans le pattern commande, indice pour trouver les arguments. */
     private static final int INDICE_ARGUMENTS = 5;
 
     /**
@@ -46,7 +56,7 @@ public class DrawingTUI extends DrawingUI {
      */
     public DrawingTUI(final Etat e, final Arret a) {
         super(e, a);
-        this.scanner = new Scanner(System.in);
+        this.scanner = new Scanner(System.in, "UTF-8");
     }
 
     /**
@@ -75,7 +85,7 @@ public class DrawingTUI extends DrawingUI {
             boolean parentheses =
                     (m.group(INDICE_PARENTHESE) == null) ? false : true;
             Object[] arguments =
-                    entreParenthèsesParser(m.group(INDICE_ARGUMENTS));
+                    entreParenthesesParser(m.group(INDICE_ARGUMENTS));
 
             return commandeTUI.getCommande(variable, parentheses, arguments,
                     super.getEtat(), this);
@@ -84,7 +94,7 @@ public class DrawingTUI extends DrawingUI {
         }
     }
 
-    private Object[] entreParenthèsesParser(String entreParentheses) {
+    Object[] entreParenthesesParser(final String entreParentheses) {
         ArrayList<Object> result = new ArrayList<>();
         if (entreParentheses == null) {
             return result.toArray();

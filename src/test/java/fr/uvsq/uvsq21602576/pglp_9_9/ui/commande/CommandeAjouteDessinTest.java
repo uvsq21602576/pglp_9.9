@@ -87,6 +87,26 @@ public class CommandeAjouteDessinTest {
         Commande com = new CommandeAjouteDessin(etat, "c", "D");
         com.execute();
     }
+    
+    /**
+     * Teste l'execution, avec dessin non dessin.
+     * @throws CommandeImpossibleException En cas de problème lors de
+     *         l'execution de la commande
+     * @throws UndoImpossibleException En cas de problème lors de l'annulation
+     *         de la commande
+     * @throws DessinGlobalException Si un dessin est nommé comme le global
+     * @throws DejaExistantException Si un dessin du meme nom existe deja
+     */
+    @Test(expected = CommandeImpossibleException.class)
+    public void executAvecDessinNonDessinTest()
+            throws DejaExistantException, DessinGlobalException,
+            CommandeImpossibleException, UndoImpossibleException {
+        Etat etat = new Etat();
+        Cercle c = new Cercle("c", new Point(1, 1), 10);
+        etat.getDessinCourant().ajoute(c);
+        Commande com = new CommandeAjouteDessin(etat, "c", "c");
+        com.execute();
+    }
 
     /**
      * Teste l'execution, avec un composant ayant le même nom dans dessin.

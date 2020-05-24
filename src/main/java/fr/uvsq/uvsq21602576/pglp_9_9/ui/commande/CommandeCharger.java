@@ -57,6 +57,10 @@ public class CommandeCharger implements CommandeUndoable {
         this.etat.ajouteDansHistorique(this);
     }
 
+    /**
+     * Annule la commande.
+     * Retire de global le dessin précédemment ajouté.
+     */
     public void undo() {
         this.etat.getGlobal().retire(nomDessin);
     }

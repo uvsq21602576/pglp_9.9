@@ -1,7 +1,7 @@
 package fr.uvsq.uvsq21602576.pglp_9_9.ui;
 
 /**
- * Quand la ligne saisie est vide
+ * Quand la ligne saisie est vide.
  * @author Flora
  */
 public class LigneVideException extends Exception {

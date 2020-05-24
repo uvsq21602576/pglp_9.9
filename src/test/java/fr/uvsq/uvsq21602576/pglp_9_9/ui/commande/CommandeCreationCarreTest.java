@@ -24,12 +24,10 @@ public class CommandeCreationCarreTest {
      * Teste l'execution, sans erreur.
      * @throws CommandeImpossibleException En cas de problème lors de
      *         l'execution de la commande
-     * @throws UndoImpossibleException En cas de problème lors de l'annulation
-     *         de la commande
      */
     @Test
     public void executeTest()
-            throws CommandeImpossibleException, UndoImpossibleException {
+            throws CommandeImpossibleException {
         Etat etat = new Etat();
         Commande c = new CommandeCreationCarre(etat, "C", new Point(1, 2), 10);
         c.execute();
@@ -37,6 +35,19 @@ public class CommandeCreationCarreTest {
         expected.add(new Carre("C", new Point(1, 2), 10));
         assertEquals(expected,
                 new ArrayList<>(etat.getDessinCourant().getComposantsFils()));
+    }
+    
+    /**
+     * Teste l'execution, avec longueur négative.
+     * @throws CommandeImpossibleException En cas de problème lors de
+     *         l'execution de la commande
+     */
+    @Test(expected = CommandeImpossibleException.class)
+    public void executeNegatifTest()
+            throws CommandeImpossibleException {
+        Etat etat = new Etat();
+        Commande c = new CommandeCreationCarre(etat, "C", new Point(1, 2), -10);
+        c.execute();
     }
 
     /**

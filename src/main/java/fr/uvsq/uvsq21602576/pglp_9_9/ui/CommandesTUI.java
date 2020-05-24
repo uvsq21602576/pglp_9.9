@@ -2,7 +2,26 @@ package fr.uvsq.uvsq21602576.pglp_9_9.ui;
 
 import fr.uvsq.uvsq21602576.pglp_9_9.Etat;
 import fr.uvsq.uvsq21602576.pglp_9_9.formes.Point;
-import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.*;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.Commande;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeAfficheDessin;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeAfficheTout;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeAjouteDessin;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeCharger;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeCopie;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeCreationCarre;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeCreationCercle;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeCreationDessin;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeCreationRectangle;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeCreationTriangle;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeDeplace;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeExit;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeRetireDessin;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeSauvegarde;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeSortirDessin;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeSupprime;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeSupprimeSauvegarde;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeUndo;
+import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeVoirDessin;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.MauvaiseUtilisationException;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.NoCommandException;
 
@@ -34,6 +53,7 @@ public enum CommandesTUI {
             return new CommandeUndo(etat.getHistorique());
         }
     },
+    /** Commande pour quitter. */
     EXIT("quitter", 0) {
         @Override
         public Commande getCommande(final String variable,
@@ -55,6 +75,7 @@ public enum CommandesTUI {
             return new CommandeExit(ui);
         }
     },
+    /** Commande pour créer un carré. */
     CREATION_CARRE("carre", 2) {
         @Override
         public Commande getCommande(final String variable,
@@ -89,6 +110,7 @@ public enum CommandesTUI {
             return new CommandeCreationCarre(etat, variable, hg, longueur);
         }
     },
+    /** Commande pour créer un cercle. */
     CREATION_CERCLE("cercle", 2) {
         @Override
         public Commande getCommande(final String variable,
@@ -123,6 +145,7 @@ public enum CommandesTUI {
             return new CommandeCreationCercle(etat, variable, centre, rayon);
         }
     },
+    /** Commande pour créer un rectangle. */
     CREATION_RECTANGLE("rectangle", 2) {
         @Override
         public Commande getCommande(final String variable,
@@ -157,6 +180,7 @@ public enum CommandesTUI {
             return new CommandeCreationRectangle(etat, variable, hg, bd);
         }
     },
+    /** Commande pour créer un triangle. */
     CREATION_TRIANGLE("triangle", 3) {
         @Override
         public Commande getCommande(final String variable,
@@ -197,6 +221,7 @@ public enum CommandesTUI {
             return new CommandeCreationTriangle(etat, variable, p1, p2, p3);
         }
     },
+    /** Commande pour créer un dessin. */
     CREATION_DESSIN("dessin", 0) {
         @Override
         public Commande getCommande(final String variable,
@@ -218,6 +243,7 @@ public enum CommandesTUI {
             return new CommandeCreationDessin(etat, variable);
         }
     },
+    /** Commande pour copier une variable. */
     COPIE("copie", 1) {
         @Override
         public Commande getCommande(final String variable,
@@ -246,6 +272,7 @@ public enum CommandesTUI {
             return new CommandeCopie(etat, variable, nom);
         }
     },
+    /** Commande pour déplacer une variable. */
     DEPLACE("deplace", 2) {
         @Override
         public Commande getCommande(final String variable,
@@ -280,6 +307,7 @@ public enum CommandesTUI {
             return new CommandeDeplace(etat, nom, v);
         }
     },
+    /** Commande pour affficher le dessin courant. */
     AFFICHE("affiche", 0) {
         @Override
         public Commande getCommande(final String variable,
@@ -301,6 +329,7 @@ public enum CommandesTUI {
             return new CommandeAfficheDessin(ui);
         }
     },
+    /** Commande pour afficher tous les dessins. */
     AFFICHE_TOUT("afficheTout", 0) {
         @Override
         public Commande getCommande(final String variable,
@@ -322,6 +351,7 @@ public enum CommandesTUI {
             return new CommandeAfficheTout(ui);
         }
     },
+    /** Commande pour ajouter une variable dans un dessin. */
     AJOUTE("ajoute", 2) {
         @Override
         public Commande getCommande(final String variable,
@@ -356,6 +386,7 @@ public enum CommandesTUI {
             return new CommandeAjouteDessin(etat, nom, nomDessin);
         }
     },
+    /** Commande pour retirer une variable d'un dessin. */
     RETIRE("retire", 2) {
         @Override
         public Commande getCommande(final String variable,
@@ -390,6 +421,7 @@ public enum CommandesTUI {
             return new CommandeRetireDessin(etat, nom, nomDessin);
         }
     },
+    /** Commande pour supprimer une variable. */
     SUPPRIME("supprime", 1) {
         @Override
         public Commande getCommande(final String variable,
@@ -418,6 +450,7 @@ public enum CommandesTUI {
             return new CommandeSupprime(etat, nom);
         }
     },
+    /** Commande pour voir un autre dessin. */
     VOIR("voir", 1) {
         @Override
         public Commande getCommande(final String variable,
@@ -446,6 +479,7 @@ public enum CommandesTUI {
             return new CommandeVoirDessin(etat, nom);
         }
     },
+    /** Commande pour sortir du dessin courant. */
     SORTIR("sortir", 0) {
         @Override
         public Commande getCommande(final String variable,
@@ -467,6 +501,7 @@ public enum CommandesTUI {
             return new CommandeSortirDessin(etat);
         }
     },
+    /** Commande pour sauvegarder un dessin. */
     SAUVEGARDE("sauvegarde", 0) {
         @Override
         public Commande getCommande(final String variable,
@@ -488,6 +523,7 @@ public enum CommandesTUI {
             return new CommandeSauvegarde(etat, ui);
         }
     },
+    /** Commande pour charger un dessin sauvegardé. */
     CHARGE("charge", 1) {
         @Override
         public Commande getCommande(final String variable,
@@ -516,6 +552,7 @@ public enum CommandesTUI {
             return new CommandeCharger(etat, nom);
         }
     },
+    /** Commande pour supprimer une sauvegarde. */
     SUPPR_SAUVEGARDE("supprimeSauvegarde", 1) {
         @Override
         public Commande getCommande(final String variable,
@@ -555,7 +592,7 @@ public enum CommandesTUI {
      * Crée une CommandesTUI avec le nom de sa fonction correspondante et le
      * nombre d'arguments necessaires.
      * @param nom Nom de la fontion.
-     * @param Nombre d'argument nécessaire pour la commande
+     * @param nb Nombre d'argument nécessaire pour la commande
      */
     CommandesTUI(final String nom, final int nb) {
         this.nomFonction = nom;

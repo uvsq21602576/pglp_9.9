@@ -85,6 +85,24 @@ public class CommandeRetireDessinTest {
     }
 
     /**
+     * Teste l'execution, avec dessin non dessin.
+     * @throws CommandeImpossibleException En cas de problème lors de
+     *         l'execution de la commande
+     * @throws UndoImpossibleException En cas de problème lors de l'annulation
+     *         de la commande
+     * @throws DejaExistantException Si un composant du même nom existe déjà
+     */
+    @Test(expected = CommandeImpossibleException.class)
+    public void executeAvecDessinNonDessinTest()
+            throws CommandeImpossibleException, UndoImpossibleException, DejaExistantException {
+        Etat etat = new Etat();
+        Cercle c = new Cercle("c", new Point(1, 1), 10);
+        etat.getDessinCourant().ajoute(c);
+        Commande com = new CommandeRetireDessin(etat, "c", "c");
+        com.execute();
+    }
+    
+    /**
      * Teste l'execution, avec un composant ayant le même nom dans dessin.
      * @throws CommandeImpossibleException En cas de problème lors de
      *         l'execution de la commande

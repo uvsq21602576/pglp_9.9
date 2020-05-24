@@ -10,6 +10,18 @@ import org.junit.Test;
  * @author Flora
  */
 public class RectangleTest {
+    
+    /**
+     * Teste le getPointBasDroit.
+     */
+    @Test
+    public void getPointBasDroit() {
+        Point p = new Point(3, 4);
+        Rectangle r = new Rectangle("r1", new Point(0, 0), p);
+        Point bd = r.getPointBasDroit();
+        assertFalse(p == bd);
+        assertEquals(p, bd);
+    }
 
     /**
      * Teste la copie.

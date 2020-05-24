@@ -1,4 +1,4 @@
-package fr.uvsq.uvsq21602576.pglp_9_9.ui;
+package fr.uvsq.uvsq21602576.pglp_9_9;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import fr.uvsq.uvsq21602576.pglp_9_9.Historique;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.CommandeUndoable;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.CommandeImpossibleException;
 import fr.uvsq.uvsq21602576.pglp_9_9.ui.commande.exceptions.UndoImpossibleException;
