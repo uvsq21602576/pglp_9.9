@@ -34,15 +34,15 @@ Toutes variables peuvent être supprimées, ou copiées.
 ## Affichage
 Il existe deux sortes d'affichage, commandés par deux commandes différentes.
 Tout d'abord, avec `afficheTout()`, le dessin Global, et donc tous les dessins, est affichées avec toutes ces composants.
-Ensuite, avec `affiche()`, seul le dessin sur lequel on travaille est affiché. Ce dessin sera un fils direct de Global, égal au ou qui contient le dessin courant. C'est cet affichage qui est fait après chaque commande.
+Ensuite, avec `affiche()`, seul le dessin sur lequel on travaille est affiché. Ce dessin sera un fils direct de Global, contenant le dessin courant. C'est cet affichage qui est fait après chaque commande.
 
 ## Sauvegarde
-Il faut tout d'abord savoir que seul un dessin fils direct de Golbal peut-être sauvegardé. On ne peut pas sauvegarder un sous-dessin indépendemment de son parent.
+Il faut tout d'abord savoir que seul un dessin fils direct de Global peut-être sauvegardé. On ne peut pas sauvegarder un sous-dessin indépendemment de son parent.
 La commande `sauvegarde()` permet de sauvegarder le dessin sur lequel on est en train de travailler, à la condition, bien sûr, qu'il soit différent de Global. Si un dessin du même nom avait déjà été sauvegardé, une confirmation est demandée pour écraser l'ancienne sauvegarde.
-Pour charger une sauvegarde d'un dessin nommé D, on utilise la commande `charger(D)`. Le dessin nommé D sera donc chargé dans le logicel, en tant que fils de Global, à la condition qu'un autre dessin nommé D n'y soit pas déjà.
+Pour charger une sauvegarde d'un dessin nommé D, on utilise la commande `charger(D)`. Le dessin nommé D sera donc chargé dans le logiciel, en tant que fils de Global, à la condition qu'un autre dessin nommé D n'y soit pas déjà.
 `supprimeSauvegarde(D)` supprime la sauvegarde du dessin D, mais ne supprime le potentiel dessin D ouvert dans le logiciel.
 
 ## Annuler et quitter
-Pour toutes les commandes ennoncées précédemments, sauf sauvegarde et supprimeSauvegarde, un historique est gardé est permet d'annuler les commandes dans l'ordre inverse d'execution. L'état du logiciel deviendra alors celui d'avant l'execution de la commande annulée.
+Pour toutes les commandes enoncées précédemments, sauf sauvegarde et supprimeSauvegarde, un historique est gardé est permet d'annuler les commandes dans l'ordre inverse d'execution. L'état du logiciel deviendra alors celui d'avant l'execution de la commande annulée.
 Pour l'annuler, on tape la commande `annule()`.
 Le logicel de dessin se fermera après l'execution de la commande `quitter()`.
